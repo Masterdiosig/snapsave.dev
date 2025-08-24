@@ -39,6 +39,18 @@
         <button id="submit" type="submit">Tải</button>
       </form>
 
+   <form id="download-form" class="form">
+        <div class="container">
+            <h2>Download TikTok Video</h2>
+            <form id="downloadForm">
+                <input type="url" id="tiktokUrl" placeholder="Paste TikTok link here..." required>
+                <button type="submit">Download</button>
+            </form>
+            <div id="resultBox"></div>
+        </div>
+    </section>
+</form>
+
       <div id="meta" class="meta" style="display:none;">
         <img id="thumb" alt="thumbnail" />
         <div>
@@ -76,6 +88,65 @@
     © <span id="y"></span> Snapsave.cfd — Không liên kết với TikTok.
   </footer>
 
-  <script src="./main.js" defer></script>
+   <footer>
+
+  <script>
+    document.getElementById("downloadForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      download();
+    });
+
+
+async function forceDownload(url, filename) {
+      try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(blobUrl);
+      } catch (err) {
+        alert("❌ Unable to load video: " + err.message);
+      }
+    }
+
+    async function download() {
+      const url = document.getElementById("tiktokUrl").value.trim();
+      const resultBox = document.getElementById("resultBox");
+      if (!url) return alert("Please enter TikTok link.");
+      resultBox.innerHTML = "⏳ Đang xử lý...";
+
+      try {
+        const res = await fetch("https://www.snaptok.us/api/Snaptik", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        if (data.code === 0 && data.data.length > 0) {
+          const meta = data.meta || {};
+          resultBox.innerHTML = `
+            ${meta.thumbnail ? `<img src="${meta.thumbnail}" alt="Thumbnail" class="thumbnail" />` : ""}
+            ${meta.author ? `<div class="author">@${meta.author}</div>` : ""}
+            ${meta.description ? `<div class="desc">${meta.description}</div>` : ""}
+            ${data.data.map((item, index) => `
+              <button class="button-go" onclick="forceDownload('${item.url}', 'video-${index + 1}.mp4')">⬇️ ${item.label}</button>
+            `).join('')}
+          `;
+        } else {
+          resultBox.innerHTML = "❌ Không lấy được link. Vui lòng thử lại.";
+        }
+      } catch (err) {
+        console.error("⚠️ Lỗi fetch:", err);
+        resultBox.innerHTML = "⚠️ Lỗi kết nối đến API.";
+      }
+    }
+  </script>
+
+  <script src="main.js"></script>
 </body>
 </html>

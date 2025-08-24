@@ -1,89 +1,95 @@
 const menuBtn = document.querySelector('.menu');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
-menuBtn.addEventListener('click', () => { sidebar.classList.toggle('active'); overlay.classList.toggle('active'); });
-overlay.addEventListener('click', () => { sidebar.classList.remove('active'); overlay.classList.remove('active'); });
 
-document.querySelectorAll('.faq-question').forEach(btn=>{
-  btn.addEventListener('click',()=>btn.parentElement.classList.toggle('active'));
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    item.classList.toggle('active');
+  });
 });
-document.getElementById('y').textContent = new Date().getFullYear();
+
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("hf_urli");
   const resultBox = document.getElementById("result");
-  const meta = document.getElementById("meta");
-  const thumb = document.getElementById("thumb");
-  const desc = document.getElementById("desc");
-  const author = document.getElementById("author");
 
   function showErrorInline(message) {
     const box = document.getElementById("error-inline");
     const msg = document.getElementById("error-inline-msg");
     msg.textContent = message;
     box.style.display = "block";
-    setTimeout(() => { box.style.display = "none"; }, 3000);
+    setTimeout(() => {
+      box.style.display = "none";
+    }, 4000);
   }
 
-  document.querySelectorAll(".sample").forEach(b=>{
-    b.addEventListener("click",()=>{
-      input.value = b.dataset.url;
-      document.getElementById("submit").click();
-    });
-  });
-
-  document.getElementById("download-form").addEventListener("submit", async (e) => {
+  document.getElementById("submit").addEventListener("click", async (e) => {
     e.preventDefault();
     const tiktokUrl = input.value.trim();
-    if (!tiktokUrl) { showErrorInline("Dán link TikTok hợp lệ!"); input.focus(); return; }
+
+    if (!tiktokUrl) {
+      showErrorInline("Paste valid link!");
+      input.focus();
+      return;
+    }
 
     try {
       const res = await fetch('/api/tiktok', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + (window.API_TOKEN || 'my_super_secret_token_123')
+          'Authorization': 'Bearer my_super_secret_token_123' // đổi nếu bạn dùng token khác
         },
         body: JSON.stringify({ url: tiktokUrl })
       });
 
       const data = await res.json();
-      if (data.code === 0 && data.data.length > 0) {
-        // meta
-        if (data.meta?.thumbnail) thumb.src = data.meta.thumbnail;
-        desc.textContent = data.meta?.description || '';
-        author.textContent = data.meta?.author ? ('Tác giả: ' + data.meta.author) : '';
-        meta.style.display = 'flex';
 
-        resultBox.innerHTML = '';
+      if (data.code === 0 && data.data.length > 0) {
+        resultBox.innerHTML = ''; // clear cũ
+
         for (const item of data.data) {
           const btn = document.createElement("button");
           btn.textContent = item.label;
+          btn.style = "display:block;margin:10px 0;padding:10px;background:#007bff;color:#fff;border:none;border-radius:6px;cursor:pointer;";
+
           btn.onclick = async () => {
             try {
               const response = await fetch(`/api/download?url=${encodeURIComponent(item.url)}`);
               const blob = await response.blob();
+
               const a = document.createElement('a');
               a.href = URL.createObjectURL(blob);
-              a.download = "tiktok-video.mp4";
+              a.download = "video.mp4"; // có thể dùng item.label nếu muốn tên riêng
               document.body.appendChild(a);
               a.click();
-              a.remove();
+              document.body.removeChild(a);
             } catch (err) {
               console.error("Lỗi tải video:", err);
               showErrorInline("Không tải được video.");
             }
           };
+
           resultBox.appendChild(btn);
         }
       } else {
-        meta.style.display = 'none';
-        resultBox.innerHTML = '';
-        showErrorInline(data.message || "Không tìm thấy video!");
+        showErrorInline("Không tìm thấy video phù hợp!");
       }
+
     } catch (error) {
-      console.error("Lỗi gọi API:", error);
-      showErrorInline("Lỗi kết nối máy chủ!");
+      console.error("Lỗi gọi API TikTok:", error);
+      showErrorInline("Lỗi kết nối tới máy chủ!");
     }
   });
 });
