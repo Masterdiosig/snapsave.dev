@@ -1,25 +1,3 @@
-const menuBtn = document.querySelector('.menu');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    item.classList.toggle('active');
-  });
-});
-
-menuBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('active');
-  overlay.classList.toggle('active');
-});
-
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('active');
-  overlay.classList.remove('active');
-});
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("hf_urli");
   const resultBox = document.getElementById("result");
@@ -45,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-     const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiktok', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
