@@ -358,21 +358,45 @@
     }
   });
      // Force download helper
-  async function forceDownload(url, filename) {
-    try {
-      const res = await fetch(url);
-      const blob = await res.blob();
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch (err) {
-      alert("❌ Không tải được video: " + err.message);
-    }
+
+async function downloadTikTok() {
+  const url = document.getElementById("tiktokUrl").value.trim();
+  if (!url) return alert("Nhập link TikTok!");
+
+  try {
+    const res = await fetch("/api/tiktok", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer my_super_secret_token_123"
+      },
+      body: JSON.stringify({ url })
+    });
+
+    const data = await res.json();
+    if (!data.video) return alert("Không lấy được video!");
+
+    // Tạo <a> tải trực tiếp, không dùng blob
+    const a = document.createElement("a");
+    a.href = data.video;
+    a.download = data.filename || "video.mp4";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+  } catch (err) {
+    console.error(err);
+    alert("Lỗi kết nối tới server!");
   }
+}
+
+document.getElementById("downloadForm").addEventListener("submit", e => {
+  e.preventDefault();
+  downloadTikTok();
+});
 </script>
+
 
 </body>
 </html>

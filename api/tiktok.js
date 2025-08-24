@@ -1,4 +1,3 @@
-// /api/tiktok.js
 import axios from "axios";
 
 const followRedirect = async (shortUrl) => {
@@ -9,30 +8,20 @@ const followRedirect = async (shortUrl) => {
       headers: { "User-Agent": "Mozilla/5.0" }
     });
     return response.request?.res?.responseUrl || shortUrl;
-  } catch (err) {
-    console.warn("⚠️ Lỗi redirect:", err.message);
+  } catch {
     return shortUrl;
   }
 };
 
 export default async function handler(req, res) {
-  if (req.method === "OPTIONS") {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    return res.status(200).end();
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const secretToken = process.env.API_SECRET_TOKEN;
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.replace("Bearer ", "").trim();
-
-  if (!token || token !== secretToken) {
-    return res.status(403).json({ error: "Forbidden - Invalid token" });
-  }
+  const token = (req.headers.authorization || "").replace("Bearer ", "").trim();
+  if (!token || token !== secretToken) return res.status(403).json({ error: "Invalid token" });
 
   const { url } = req.body;
-  if (!url) return res.status(400).json({ code: 1, message: "Thiếu URL" });
+  if (!url) return res.status(400).json({ error: "Thiếu URL" });
 
   const finalUrl = await followRedirect(url);
 
@@ -51,40 +40,22 @@ export default async function handler(req, res) {
     const data = response.data?.data || {};
     const videoHD = data.hdplay;
     const videoSD = data.play;
-    const audio = data.music;
-    const downloadUrl = data.downloadUrl;
 
-    const list = [
-      ...(videoSD ? [{ url: videoSD, label: "Tải không watermark" }] : []),
-      ...(videoHD ? [{ url: videoHD, label: "Tải HD" }] : []),
-      ...(audio ? [{ url: audio, label: "Tải nhạc" }] : []),
-      ...(downloadUrl ? [{ url: downloadUrl, label: "Tải video (RapidAPI)" }] : [])
-    ];
+    if (!videoHD && !videoSD) return res.status(404).json({ error: "Không lấy được video" });
 
-    if (list.length === 0) {
-      return res
-        .status(200)
-        .json({ code: 2, message: "❌ Không lấy được video", raw: data });
-    }
-
-    return res.status(200).json({
-      code: 0,
-      data: list,
+    // Trả link trực tiếp để tải về
+    res.status(200).json({
+      video: videoHD || videoSD,
+      filename: `tiktok-${Date.now()}.mp4`,
       meta: {
         thumbnail: data.cover,
         description: data.description || data.title,
-        author:
-          data.author?.nickname ||
-          data.author?.username ||
-          data.author?.unique_id ||
-          ""
+        author: data.author?.nickname || data.author?.username || ""
       }
     });
+
   } catch (err) {
-    return res.status(500).json({
-      code: 500,
-      message: "Lỗi server khi gọi RapidAPI",
-      error: err.response?.data || err.message
-    });
+    console.error(err);
+    res.status(500).json({ error: "Lỗi server khi gọi RapidAPI" });
   }
 }
