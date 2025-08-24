@@ -1,0 +1,155 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container wrap */
+.wrap {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
+  color: #2563eb;
+}
+
+/* Secondary nav (giữa header và footer) */
+.footer-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #2563eb;
+}
+
+/* Content */
+.content {
+  padding: 2.5rem 0;
+}
+
+.dmca h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #111827;
+}
+
+.lang-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.lang-block {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.lang-block h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+}
+
+.lang-block p {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+/* Footer */
+.site-footer {
+  background: #111827;
+  color: #d1d5db;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.footer-inner nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-inner nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  transition: color 0.2s;
+}
+
+.footer-inner nav a:hover {
+  color: #fff;
+}
+
+.footer-inner .small {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .lang-columns {
+    grid-template-columns: 1fr;
+  }
+  .main-nav, .footer-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+}
