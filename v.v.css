@@ -31,15 +31,19 @@ html, body {
 
 .main-nav {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .main-nav a {
   text-decoration: none;
   color: #374151;
   font-weight: 600;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
@@ -48,19 +52,23 @@ html, body {
   color: #2563eb;
 }
 
-/* Secondary nav */
+/* Secondary nav (footer-top) */
 .footer-nav {
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 0.5rem 0;
-  flex-wrap: wrap;
 }
 
 .footer-nav a {
   text-decoration: none;
   font-size: 0.9rem;
   color: #6b7280;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
@@ -83,7 +91,7 @@ html, body {
 
 .lang-columns {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile mặc định 1 cột */
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
@@ -125,14 +133,18 @@ html, body {
 
 .footer-inner nav {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 1rem;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .footer-inner nav a {
   text-decoration: none;
   font-size: 0.9rem;
   color: #9ca3af;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
@@ -147,8 +159,17 @@ html, body {
 }
 
 /* Responsive */
-@media (min-width: 769px) {
+@media (max-width: 768px) {
   .lang-columns {
-    grid-template-columns: 1fr 1fr; /* Desktop mới chia 2 cột */
+    grid-template-columns: 1fr;
+  }
+  .main-nav,
+  .footer-nav,
+  .footer-inner nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.75rem;
+    overflow-x: auto;
   }
 }
