@@ -1,83 +1,90 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("hf_urli");
-  const resultBox = document.getElementById("result");
-  const metaBox = document.getElementById("meta");
-  const thumb = document.getElementById("thumb");
-  const desc = document.getElementById("desc");
-  const author = document.getElementById("author");
+// /api/tiktok.js
+import axios from "axios";
 
-  function showErrorInline(message) {
-    const box = document.getElementById("error-inline");
-    const msg = document.getElementById("error-inline-msg");
-    msg.textContent = message;
-    box.style.display = "block";
-    setTimeout(() => { box.style.display = "none"; }, 4000);
+const followRedirect = async (shortUrl) => {
+  try {
+    const response = await axios.get(shortUrl, {
+      maxRedirects: 5,
+      timeout: 5000,
+      headers: { "User-Agent": "Mozilla/5.0" }
+    });
+    return response.request?.res?.responseUrl || shortUrl;
+  } catch (err) {
+    console.warn("⚠️ Lỗi redirect:", err.message);
+    return shortUrl;
+  }
+};
+
+export default async function handler(req, res) {
+  if (req.method === "OPTIONS") {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    return res.status(200).end();
   }
 
-  document.getElementById("submit").addEventListener("click", async (e) => {
-    e.preventDefault();
-    const tiktokUrl = input.value.trim();
-    if (!tiktokUrl) {
-      showErrorInline("Dán link TikTok hợp lệ!");
-      input.focus();
-      return;
-    }
+  const secretToken = process.env.API_SECRET_TOKEN;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.replace("Bearer ", "").trim();
 
-    try {
-      const res = await fetch('/api/tiktok', {
-        method: 'POST',
+  if (!token || token !== secretToken) {
+    return res.status(403).json({ error: "Forbidden - Invalid token" });
+  }
+
+  const { url } = req.body;
+  if (!url) return res.status(400).json({ code: 1, message: "Thiếu URL" });
+
+  const finalUrl = await followRedirect(url);
+
+  try {
+    const response = await axios.get(
+      "https://tiktok-download-video1.p.rapidapi.com/newGetVideo",
+      {
+        params: { url: finalUrl, hd: "1" },
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer my_super_secret_token_123' // phải trùng server
-        },
-        body: JSON.stringify({ url: tiktokUrl })
-      });
-
-      const data = await res.json();
-
-      if (res.status !== 200) {
-        showErrorInline(data.error || "Lỗi server");
-        return;
+          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+          "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
+        }
       }
+    );
 
-      if (data.code === 0 && data.data.length > 0) {
-        // hiển thị meta
-        if (data.meta?.thumbnail) thumb.src = data.meta.thumbnail;
-        desc.textContent = data.meta?.description || "";
-        author.textContent = data.meta?.author ? ("Tác giả: " + data.meta.author) : "";
-        metaBox.style.display = 'flex';
+    const data = response.data?.data || {};
+    const videoHD = data.hdplay;
+    const videoSD = data.play;
+    const audio = data.music;
+    const downloadUrl = data.downloadUrl;
 
-        // hiển thị nút download
-        resultBox.innerHTML = '';
-        data.data.forEach((item, idx) => {
-          const btn = document.createElement("button");
-          btn.textContent = item.label;
-          btn.style = "display:block;margin:10px 0;padding:10px;background:#007bff;color:#fff;border:none;border-radius:6px;cursor:pointer;";
-          btn.onclick = async () => {
-            try {
-              const response = await fetch(`/api/download?url=${encodeURIComponent(item.url)}`);
-              const blob = await response.blob();
-              const a = document.createElement('a');
-              a.href = URL.createObjectURL(blob);
-              a.download = `video-${idx + 1}.mp4`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            } catch (err) {
-              console.error("Lỗi tải video:", err);
-              showErrorInline("Không tải được video.");
-            }
-          };
-          resultBox.appendChild(btn);
-        });
-      } else {
-        metaBox.style.display = 'none';
-        resultBox.innerHTML = '';
-        showErrorInline(data.message || "Không tìm thấy video!");
-      }
-    } catch (err) {
-      console.error("Lỗi gọi API TikTok:", err);
-      showErrorInline("Lỗi kết nối tới máy chủ!");
+    const list = [
+      ...(videoSD ? [{ url: videoSD, label: "Tải không watermark" }] : []),
+      ...(videoHD ? [{ url: videoHD, label: "Tải HD" }] : []),
+      ...(audio ? [{ url: audio, label: "Tải nhạc" }] : []),
+      ...(downloadUrl ? [{ url: downloadUrl, label: "Tải video (RapidAPI)" }] : [])
+    ];
+
+    if (list.length === 0) {
+      return res
+        .status(200)
+        .json({ code: 2, message: "❌ Không lấy được video", raw: data });
     }
-  });
-});
+
+    return res.status(200).json({
+      code: 0,
+      data: list,
+      meta: {
+        thumbnail: data.cover,
+        description: data.description || data.title,
+        author:
+          data.author?.nickname ||
+          data.author?.username ||
+          data.author?.unique_id ||
+          ""
+      }
+    });
+  } catch (err) {
+    return res.status(500).json({
+      code: 500,
+      message: "Lỗi server khi gọi RapidAPI",
+      error: err.response?.data || err.message
+    });
+  }
+}
