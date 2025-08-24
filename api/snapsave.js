@@ -14,7 +14,7 @@ app.get("/api/tiktok", async (req, res) => {
     // nối URL query
     const apiUrl = `https://tiktok-downloader-download-tiktok-videos.p.rapidapi.com/vid/index?url=${encodeURIComponent(url)}`;
 
-    // gọi API RapidAPI Snapsave
+    // gọi  RapAPIidAPI Snapsave
     const apiRes = await fetch(apiUrl, {
       method: "GET",
       headers: {
