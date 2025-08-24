@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch('/api/tiktok', {
+     const res = await fetch('/api/tiktok', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

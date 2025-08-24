@@ -121,7 +121,7 @@ async function forceDownload(url, filename) {
       resultBox.innerHTML = "⏳ Đang xử lý...";
 
       try {
-        const res = await fetch("https://www.snaptok.us/api/Snaptik", {
+        const res = await fetch("https://www.snapsave.dev/api/Snaptik", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url })
