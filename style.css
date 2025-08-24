@@ -73,44 +73,7 @@ a{color:var(--primary);text-decoration:none}
   color: #2563eb;
 }
 
-/* Content */
-.content {
-  padding: 2.5rem 0;
-}
 
-.dmca h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #111827;
-}
-
-.lang-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.lang-block {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.lang-block h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2563eb;
-  margin-bottom: 0.75rem;
-}
-
-.lang-block p {
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  color: #374151;
-}
 
 /* Footer */
 .site-footer {
