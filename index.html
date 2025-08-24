@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Snapsave.dev – Tải video TikTok không logo</title>
-  <meta name="description" content="Dán link TikTok để tải video không logo, tốc độ nhanh, miễn phí." />
-  <link rel="stylesheet" href="./style.css" />
+  <meta name="description" content="Dán link TikTok để tải video không logo, tốc độ nhanh, miễn phí.">
 
-<!-- Basic Meta -->
+  <!-- Fonts & CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+<!-- SEO Meta -->
 <title>SnapTik: Download TikTok Video without Watermark Fast & Free</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
@@ -73,6 +76,7 @@
 
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
     <div class="brand">
       <span class="logo">⬇️</span>
@@ -92,20 +96,21 @@
   </aside>
   <div id="overlay" class="overlay"></div>
 
+  <!-- Main container -->
   <main class="container">
+    <!-- Hero / Form -->
     <section class="hero">
       <h2>Tải video TikTok không logo</h2>
       <p>Dán link TikTok vào ô dưới và bấm <b>Tải</b>. Không cần cài app.</p>
 
+      <form id="downloadForm" class="form">
+        <input type="url" id="tiktokUrl" placeholder="Paste TikTok link here..." required>
+        <button type="submit">Tải</button>
+      </form>
+
       <div id="error-inline" class="alert" style="display:none;">
         <span id="error-inline-msg"></span>
       </div>
-
-      <!-- Chỉ giữ 1 form -->
-      <form id="downloadForm" class="form">
-        <input type="url" id="tiktokUrl" placeholder="Paste TikTok link here..." required />
-        <button type="submit">Tải</button>
-      </form>
 
       <div id="resultBox"></div>
 
@@ -116,6 +121,7 @@
       </div>
     </section>
 
+    <!-- FAQ -->
     <section id="faq" class="faq">
       <h2>Hỏi đáp</h2>
       <div class="faq-item">
@@ -129,7 +135,6 @@
         <div class="faq-answer">Có. Bạn có thể dùng thoải mái.</div>
       </div>
     </section>
-  </main>
 
  <!-- Content -->
   <section class="content container">
@@ -169,7 +174,7 @@
       <p>Dán liên kết vào ô tìm kiếm trên Snapsave.dev.</li>
       <p>Nhấn nút <b>Tải xuống</b> và chờ vài giây.</p>
       <p>Chọn định dạng, chất lượng và lưu về thiết bị.</p>
- 
+
 
     <h2>Tải video TikTok trên iPhone và iPad</h2>
     <p>Snapsave.dev là ứng dụng dựa trên trình duyệt, tương thích với mọi thiết bị iOS và Android.</p>
@@ -266,32 +271,28 @@
     <p>Snapsave.dev is not just a tool but also a symbol of a youthful, modern lifestyle, especially for
        techchnology lovers. Visit Snapsave.dev now to experience what makes it special!</p>
     </section>
-    
-      <nav class="footer-nav"> 
-        <a href="privacy.html">Privacy</a>
-        <a href="dmca.html">DMCA</a>
-        <a href="about.html">About Us</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
 
-
+      <!-- Footer -->
   <footer class="footer">
-    © <span id="y"></span> Snapsave.dev — Not affiliated with TikTok.
+    <nav class="footer-nav">
+      <a href="privacy.html">Privacy</a>
+      <a href="dmca.html">DMCA</a>
+      <a href="about.html">About Us</a>
+    </nav>
+    <p>© <span id="y"></span> Snapsave.dev — Not affiliated with TikTok.</p>
   </footer>
-
   
+<!-- JS -->
   <script>
-  // Sidebar menu toggle
+  // Menu toggle
   const menuBtn = document.querySelector('.menu');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
-
   menuBtn.addEventListener('click', () => {
     sidebar.classList.toggle('active');
     overlay.classList.toggle('active');
   });
-
   overlay.addEventListener('click', () => {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
@@ -299,23 +300,55 @@
 
   // FAQ toggle
   document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      item.classList.toggle('active');
-    });
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('active'));
   });
 
   // Sample buttons
   document.querySelectorAll('.sample').forEach(btn => {
     btn.addEventListener('click', () => {
-      const url = btn.dataset.url;
-      document.getElementById('tiktokUrl').value = url;
-      document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+      document.getElementById('tiktokUrl').value = btn.dataset.url;
+      document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
     });
   });
 
-  // Download form
-   document.getElementById("downloadForm").addEventListener("submit", async function(e) {
+    // Download form
+  document.getElementById("downloadForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const url = document.getElementById("tiktokUrl").value.trim();
+    const resultBox = document.getElementById("resultBox");
+    if (!url) return alert("Vui lòng nhập link TikTok.");
+
+    resultBox.innerHTML = "⏳ Đang xử lý...";
+
+     try {
+      const res = await fetch("/api/tiktok", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer my_super_secret_token_123"
+        },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      if (!data.video) {
+        resultBox.innerHTML = "❌ Không lấy được video.";
+        return;
+      }
+
+  resultBox.innerHTML = `
+        ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
+        ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
+        ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+        <button class="button-go" onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
+      `;
+    } catch(err) {
+      console.error(err);
+      resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
+    }
+  });
+
+     // Download form
+  document.getElementById("downloadForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     const url = document.getElementById("tiktokUrl").value.trim();
     const resultBox = document.getElementById("resultBox");
@@ -324,80 +357,44 @@
     resultBox.innerHTML = "⏳ Đang xử lý...";
 
     try {
-      const res = await fetch('/api/tiktok', {
-        method: 'POST',
+      const res = await fetch("/api/tiktok", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer my_super_secret_token_123'
+          "Content-Type": "application/json",
+          "Authorization": "Bearer my_super_secret_token_123"
         },
         body: JSON.stringify({ url })
       });
-
       const data = await res.json();
-
-      if (data.code !== 0 || !data.data || data.data.length === 0) {
-        resultBox.innerHTML = "❌ Không lấy được video. Vui lòng thử lại.";
+      if (!data.video) {
+        resultBox.innerHTML = "❌ Không lấy được video.";
         return;
       }
 
-      const metaHTML = `
-        ${data.meta.thumbnail ? `<img src="${data.meta.thumbnail}" alt="Thumbnail" class="thumbnail" />` : ""}
-        ${data.meta.author ? `<div class="author">@${data.meta.author}</div>` : ""}
-        ${data.meta.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+      resultBox.innerHTML = `
+        ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
+        ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
+        ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+        <button class="button-go" onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
       `;
-
-      const buttonsHTML = data.data.map((item, index) => `
-        <button class="button-go" onclick="forceDownload('${item.url}', 'video-${index+1}.mp4')">${item.label}</button>
-      `).join("");
-
-      resultBox.innerHTML = metaHTML + buttonsHTML;
-
-    } catch (err) {
-      console.error("⚠️ Lỗi fetch:", err);
-      resultBox.innerHTML = "⚠️ Lỗi kết nối đến API.";
+    } catch(err) {
+      console.error(err);
+      resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
     }
   });
-     // Force download helper
 
-async function downloadTikTok() {
-  const url = document.getElementById("tiktokUrl").value.trim();
-  if (!url) return alert("Nhập link TikTok!");
-
-  try {
-    const res = await fetch("/api/tiktok", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer my_super_secret_token_123"
-      },
-      body: JSON.stringify({ url })
-    });
-
-    const data = await res.json();
-    if (!data.video) return alert("Không lấy được video!");
-
-    // Tạo <a> tải trực tiếp, không dùng blob
+  function forceDownload(url, filename) {
     const a = document.createElement("a");
-    a.href = data.video;
-    a.download = data.filename || "video.mp4";
-    a.style.display = "none";
+    a.href = url;
+    a.download = filename || "video.mp4";
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-
-  } catch (err) {
-    console.error(err);
-    alert("Lỗi kết nối tới server!");
+    a.remove();
   }
-}
 
-document.getElementById("downloadForm").addEventListener("submit", e => {
-  e.preventDefault();
-  downloadTikTok();
-});
-</script>
-
-
+  // Year
+  document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
 
