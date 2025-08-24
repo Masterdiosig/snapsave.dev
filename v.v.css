@@ -33,6 +33,7 @@ html, body {
   display: flex;
   gap: 1.5rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .main-nav a {
@@ -47,12 +48,13 @@ html, body {
   color: #2563eb;
 }
 
-/* Secondary nav (giữa header và footer) */
+/* Secondary nav */
 .footer-nav {
   display: flex;
   gap: 1rem;
   justify-content: center;
   padding: 0.5rem 0;
+  flex-wrap: wrap;
 }
 
 .footer-nav a {
@@ -81,7 +83,7 @@ html, body {
 
 .lang-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* Mobile mặc định 1 cột */
   gap: 2rem;
 }
 
@@ -124,6 +126,7 @@ html, body {
 .footer-inner nav {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .footer-inner nav a {
@@ -144,12 +147,8 @@ html, body {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (min-width: 769px) {
   .lang-columns {
-    grid-template-columns: 1fr;
-  }
-  .main-nav, .footer-nav {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr 1fr; /* Desktop mới chia 2 cột */
   }
 }

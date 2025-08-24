@@ -48,3 +48,22 @@ a{color:var(--primary);text-decoration:none}
 .footer{padding:24px;text-align:center;color:var(--muted)}
 
 
+/* Secondary nav */
+.footer-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0.5rem 0;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #2563eb;
+}
