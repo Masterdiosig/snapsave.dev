@@ -30,7 +30,7 @@ app.post("/api/tiktok", async (req, res) => {
     // Gọi API RapidAPI Snapsave
     const options = {
       method: "POST",
-      url: "https://tiktok-download-video1.p.rapidapi.com/snapsave",
+      url: "https://tiktok-download-video1.p.rapidapi.com/tiktok",
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
