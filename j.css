@@ -122,18 +122,7 @@ a{color:var(--primary);text-decoration:none;}
 }
 .form button:hover{opacity:.9;transform:scale(1.02);}
 
-/* Icon dán link */
-.form::after{
-  content:"📋";
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:18px;
-  cursor:pointer;
-  color:var(--muted);
-}
-.form::after:hover{color:var(--primary);}
+
 
 /* Các phần khác giữ nguyên */
 .alert{background:#2b1a1a;border:1px solid #5a2c2c;color:#ffd7d7;padding:10px 12px;border-radius:10px;margin-top:8px;}
@@ -192,24 +181,50 @@ a{color:var(--primary);text-decoration:none;}
   margin: 16px 0;
 }
 
-.form input {
+/* Bọc input + nút Paste */
+.input-wrap {
+  position: relative;
   flex: 1;
+}
+
+.input-wrap input {
+  width: 100%;
   border: 1px solid var(--border);
   background: #0c0f1e;
   color: var(--text);
-  padding: 14px 40px 14px 16px; /* chừa chỗ bên phải cho icon */
+  padding: 14px 70px 14px 16px; /* chừa chỗ bên phải cho nút */
   border-radius: 12px;
   outline: none;
-  font-size: 16px; /* tránh iOS zoom */
+  font-size: 18px; /* tránh iOS zoom */
   -webkit-text-size-adjust: 100%;
-  position: relative;
 }
 
-.form input:focus {
+.input-wrap input:focus {
   border-color: var(--primary);
 }
 
-.form button {
+/* Nút Paste/Clear */
+.paste-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: var(--primary);
+  color: #0b0e1a;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.paste-btn:hover {
+  background: var(--primary-2);
+}
+
+/* Submit */
+.form > button[type="submit"] {
   border: 0;
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
   color: #0b0e1a;
@@ -220,38 +235,16 @@ a{color:var(--primary);text-decoration:none;}
   font-size: 16px;
 }
 
-/* Icon dán trong input */
-.form {
-  position: relative;
-}
-
-.form::after {
-  content: "📋";
-  position: absolute;
-  right: 90px; /* nằm trước nút "Tải" */
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 25px;
-  opacity: 0.7;
-}
-
-.form::after:hover {
-  opacity: 1;
-}
-
 /* Mobile responsive */
 @media (max-width: 480px) {
   .form {
     flex-direction: column;
     gap: 12px;
   }
-  .form input,
-  .form button {
+  .input-wrap input {
+    padding-right: 80px; /* chừa cho nút Paste trên mobile */
+  }
+  .form > button[type="submit"] {
     width: 100%;
   }
-  .form::after {
-    right: 16px; /* icon nằm trong input */
-  }
 }
-
