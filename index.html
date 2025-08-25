@@ -8,7 +8,7 @@
 
   <!-- Fonts & CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="j.css">
 
 <!-- SEO Meta -->
 <title>SnapTik: Download TikTok Video without Watermark Fast & Free</title>
@@ -348,6 +348,8 @@
   });
 
      // Download form
+
+
   document.getElementById("downloadForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     const url = document.getElementById("tiktokUrl").value.trim();
@@ -391,6 +393,37 @@
     a.click();
     a.remove();
   }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".form");
+  const input = document.getElementById("tiktokUrl");
+
+  // Bắt sự kiện click vào vùng icon 📋
+  form.addEventListener("click", async (e) => {
+    const rect = input.getBoundingClientRect();
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+
+    // Check xem có click vào phần icon (bên phải input)
+    if (
+      clickX >= rect.right - 36 &&
+      clickX <= rect.right &&
+      clickY >= rect.top &&
+      clickY <= rect.bottom
+    ) {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          input.value = text;
+          input.focus();
+        }
+      } catch (err) {
+        console.error("Không thể đọc clipboard:", err);
+      }
+    }
+  });
+});
+
 
   // Year
   document.getElementById("y").textContent = new Date().getFullYear();
