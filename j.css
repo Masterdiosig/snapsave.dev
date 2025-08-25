@@ -174,14 +174,12 @@ a{color:var(--primary);text-decoration:none;}
 }
 
 
-
 .form {
   display: flex;
   gap: 10px;
   margin: 16px 0;
 }
 
-/* Bọc input + nút Paste */
 .input-wrap {
   position: relative;
   flex: 1;
@@ -192,10 +190,10 @@ a{color:var(--primary);text-decoration:none;}
   border: 1px solid var(--border);
   background: #0c0f1e;
   color: var(--text);
-  padding: 14px 70px 14px 16px; /* chừa chỗ bên phải cho nút */
+  padding: 14px 80px 14px 16px; /* luôn chừa chỗ bên phải cho Paste */
   border-radius: 12px;
   outline: none;
-  font-size: 18px; /* tránh iOS zoom */
+  font-size: 16px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -203,10 +201,9 @@ a{color:var(--primary);text-decoration:none;}
   border-color: var(--primary);
 }
 
-/* Nút Paste/Clear */
 .paste-btn {
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   border: 0;
@@ -217,13 +214,15 @@ a{color:var(--primary);text-decoration:none;}
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .paste-btn:hover {
   background: var(--primary-2);
 }
 
-/* Submit */
+/* Nút tải */
 .form > button[type="submit"] {
   border: 0;
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
@@ -238,11 +237,8 @@ a{color:var(--primary);text-decoration:none;}
 /* Mobile responsive */
 @media (max-width: 480px) {
   .form {
-    flex-direction: column;
+    flex-direction: column; /* input + tải xuống dòng */
     gap: 12px;
-  }
-  .input-wrap input {
-    padding-right: 80px; /* chừa cho nút Paste trên mobile */
   }
   .form > button[type="submit"] {
     width: 100%;
