@@ -430,6 +430,35 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("tiktokUrl");
+  const pasteBtn = document.getElementById("pasteBtn");
+
+  pasteBtn.addEventListener("click", async () => {
+    if (pasteBtn.textContent === "Paste") {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          input.value = text;
+          pasteBtn.textContent = "Clear"; // đổi thành Clear
+        }
+      } catch (err) {
+        console.error("Không thể đọc clipboard: ", err);
+      }
+    } else {
+      input.value = ""; // clear input
+      pasteBtn.textContent = "Paste"; // đổi lại Paste
+      input.focus();
+    }
+  });
+
+  // Nếu người dùng tự xóa input -> nút tự đổi về Paste
+  input.addEventListener("input", () => {
+    if (!input.value.trim()) {
+      pasteBtn.textContent = "Paste";
+    }
+  });
+});
 
   // Year
   document.getElementById("y").textContent = new Date().getFullYear();
