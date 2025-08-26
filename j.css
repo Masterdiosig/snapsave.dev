@@ -164,16 +164,17 @@ a{color:var(--primary);text-decoration:none;}
 }
 
 /* nút Paste nằm trong input */
+/* paste button */
 .paste-btn {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 12px;
   transform: translateY(-50%);
   border: none;
   background: var(--primary);
   color: #0b0e1a;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 8px 14px;  /* hơi lớn hơn để dễ bấm trên mobile */
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
@@ -205,9 +206,14 @@ a{color:var(--primary);text-decoration:none;}
 
 /* Mobile */
 @media (max-width: 480px) {
-  .form {
-    flex-direction: column; /* input + nút tải xuống dòng */
-    gap: 12px;
+  .input-wrap input {
+    padding-right: 120px; /* chừa rộng hơn cho chắc */
+    height: 48px;         /* input cao hơn, bấm dễ */
+    font-size: 16px;
+  }
+.paste-btn {
+    padding: 10px 16px;  /* bấm dễ hơn trên mobile */
+    font-size: 15px;
   }
 
   .input-wrap {
