@@ -141,91 +141,51 @@ a{color:var(--primary);text-decoration:none;}
 }
 
 .input-wrap {
+  display: flex;
+  align-items: center;
   position: relative;
-  flex: 1;
-}
-
-.input-wrap input {
-  width: 100%;
-  border: 1px solid var(--border);
   background: #0c0f1e;
-  color: var(--text);
-  padding: 14px 80px 14px 16px; /* chừa khoảng trống bên phải */
+  border: 1px solid var(--border);
   border-radius: 12px;
-  outline: none;
+  overflow: hidden;
+}
+
+/* input */
+.input-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  padding: 14px 16px;
   font-size: 16px;
-  box-sizing: border-box;
-  transition: border-color .2s, box-shadow .2s;
+  outline: none;
 }
 
-.input-wrap input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 8px rgba(124, 140, 255, .4);
-}
-
-/* nút Paste nằm trong input */
-/* paste button */
+/* nút Paste */
 .paste-btn {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
   border: none;
   background: var(--primary);
   color: #0b0e1a;
   font-weight: 600;
-  padding: 8px 14px;  /* hơi lớn hơn để dễ bấm trên mobile */
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 10px 16px;
   font-size: 14px;
+  cursor: pointer;
   white-space: nowrap;
-  line-height: 1;
+  border-radius: 0; /* dính sát input */
+  height: 100%;    /* bằng chiều cao input */
 }
 
 .paste-btn:hover {
   background: var(--primary-2);
 }
 
-/* nút Tải */
-.form > button[type="submit"] {
-  border: 0;
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
-  color: #0b0e1a;
-  font-weight: 700;
-  padding: 14px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: opacity .2s, transform .1s;
-}
-
-.form > button[type="submit"]:hover {
-  opacity: .9;
-  transform: scale(1.02);
-}
-
-/* Mobile */
-@media (max-width: 480px) {
+/* Mobile vẫn ngon mà không cần chỉnh nhiều */
+@media (max-width:480px){
   .input-wrap input {
-    padding-right: 120px; /* chừa rộng hơn cho chắc */
-    height: 48px;         /* input cao hơn, bấm dễ */
     font-size: 16px;
   }
-.paste-btn {
-    padding: 10px 16px;  /* bấm dễ hơn trên mobile */
+  .paste-btn {
     font-size: 15px;
-  }
-
-  .input-wrap {
-    width: 100%;
-  }
-
-  .input-wrap input {
-    width: 100%;
-    padding-right: 90px; /* luôn đủ chỗ cho Paste */
-  }
-
-  .form > button[type="submit"] {
-    width: 100%;
+    padding: 10px 18px;
   }
 }
