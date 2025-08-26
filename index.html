@@ -1,14 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Snapsave.dev – Tải video TikTok không logo</title>
-  <meta name="description" content="Dán link TikTok để tải video không logo, tốc độ nhanh, miễn phí.">
-
-
-  <!-- Fonts & CSS -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snapsave.dev - Tải video TikTok</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
 <!-- SEO Meta -->
@@ -80,49 +76,69 @@
 
 </head>
 <body>
+  <!-- Menu -->
+  <nav class="navbar">
+    <div class="nav-logo">Snapsave.dev</div>
+    <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
+    <ul class="nav-links">
+      <li><a href="#">Trang chủ</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+    </ul>
+  </nav>
+
   <!-- Header -->
   <header class="header">
-    <div class="brand">
-      <span class="logo">⬇️</span>
-      <h1>Snapsave <b>dev</b></h1>
-    </div>
-    <button class="menu" aria-label="Open menu">☰</button>
+    <h1><span class="logo">Snapsave.dev</span></h1>
+    <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
-  <aside id="sidebar" class="sidebar">
-    <nav>
-      <a href="/">Home</a>
-      <a href="#">Use</a>
-      <a href="#faq">Q&A</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </aside>
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Main container -->
-  <main class="container">
-    <!-- Hero / Form -->
-    <section class="hero">
-    Dán link TikTok vào ô dưới và bấm <b>Tải</b>. Không cần cài app.</p>
-
-      <form id="downloadForm" class="form">
-        <div class="input-wrap">
-        <input type="url" id="tiktokUrl" placeholder="Paste TikTok link here..." required>
-        <button type="button" id="pasteBtn" class="paste-btn">Paste</button>
-        </div>
-        <button type="submit">Tải</button>
-      </form>
-
-      <div id="error-inline" class="alert" style="display:none;">
-        <span id="error-inline-msg"></span>
-      </div>
-
-      <div id="resultBox"></div>
-
+  <!-- Form -->
+  <main>
+    <form class="download-form">
+      <input type="text" placeholder="Dán link TikTok vào đây..." aria-label="Link video TikTok">
+      <button type="submit">Tải xuống</button>
+    </form>
   
     </section>
 
+
+<!-- Features -->
+    <section class="features">
+      <div class="feature-item">
+        <i class="fa-solid fa-ban fa-2x"></i>
+        <h3>Không watermark</h3>
+        <p>Video sạch sẽ, không logo TikTok.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-photo-film fa-2x"></i>
+        <h3>Nhiều định dạng</h3>
+        <p>Video, ảnh, slideshow, MP3.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-bolt fa-2x"></i>
+        <h3>Tốc độ cao</h3>
+        <p>Xử lý cực nhanh, không cần đăng nhập.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <h2>Câu hỏi thường gặp</h2>
+      <div class="faq-item">
+        <h4>Tải video có miễn phí không?</h4>
+        <p>Có, Snapsave.dev hoàn toàn miễn phí và không cần đăng ký.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Có lưu trữ video của tôi không?</h4>
+        <p>Không, tất cả video được xử lý trực tiếp và không lưu trên server.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Có thể tải trên iPhone không?</h4>
+        <p>Có, chỉ cần dùng Safari/Chrome và dán link TikTok.</p>
+      </div>
+    </section>
+  </main>
     <!-- FAQ -->
     <section id="faq" class="faq">
       <h2>Hỏi đáp</h2>
@@ -284,14 +300,24 @@
     </main>
 
       <!-- Footer -->
-  <footer class="footer">
-    <nav class="footer-nav">
-      <a href="privacy.html">Privacy</a>
-      <a href="dmca.html">DMCA</a>
-      <a href="about.html">About Us</a>
+<!-- Footer -->
+  <footer id="contact">
+    <p>&copy; 2025 Snapsave.dev. All rights reserved.</p>
+    <nav>
+      <a href="#">Điều khoản</a> | 
+      <a href="#">Chính sách</a> | 
+      <a href="#">Liên hệ</a>
     </nav>
-    <p>© <span id="y"></span> Snapsave.dev — Not affiliated with TikTok.</p>
   </footer>
+
+  <script>
+    // Toggle menu mobile
+    document.querySelector(".nav-toggle").addEventListener("click", () => {
+      document.querySelector(".nav-links").classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
   
 <!-- JS -->
   <script>
