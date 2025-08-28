@@ -409,17 +409,20 @@ If the link is new, it may take 1–2 seconds the first time.
         const data = await res.json();
         console.log("API trả về:", data);
 
-        if (!data.video) {
-          resultBox.innerHTML = "❌ Không lấy được video.";
-          return;
-        }
+        if (!data || !data.data || !data.data.length) {
+  resultBox.innerHTML = "❌ Không lấy được video.";
+  return;
+}
 
-        resultBox.innerHTML = `
-          ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
-          ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
-          ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
-          <button onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
-        `;
+resultBox.innerHTML = `
+  ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
+  ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
+  ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+  ${data.data.map(item =>
+    `<button onclick="forceDownload('${item.url}', 'video.mp4')">⬇️ ${item.label}</button>`
+  ).join("")}
+`;
+
       } catch (err) {
         console.error(err);
         resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
