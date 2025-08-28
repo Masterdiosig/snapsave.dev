@@ -1,114 +1,43 @@
-import axios from 'axios';
+import axios from "axios";
 
-const followRedirect = async (shortUrl) => {
-  try {
-    const response = await axios.get(shortUrl, {
-      maxRedirects: 5,
-      timeout: 5000,
-      headers: {
-        "User-Agent": "Mozilla/5.0"
-      }
-    });
-    return response.request?.res?.responseUrl || shortUrl;
-  } catch (err) {
-    console.warn("⚠️ Lỗi redirect:", err.message);
-    return shortUrl;
-  }
-};
+export default async function handler(req, res) {
+  const { url, token } = req.query;
 
-const handler = async (req, res) => {
-  const allowedOrigins = ['https://snapth.vercel.app', 'https://snapsave.dev', 'https://www.snapsave.dev'];
-  const secretToken = process.env.API_SECRET_TOKEN;
-  const origin = req.headers.origin || req.headers.referer || '';
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.replace('Bearer ', '').trim();
-
-  // ✅ CORS
-  if (allowedOrigins.some(o => origin.startsWith(o))) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  } else {
-    console.warn('⛔ Bị chặn: sai domain:', origin);
-    return res.status(403).json({ error: 'Forbidden - Invalid origin' });
+  // 🔐 Kiểm tra token
+  if (token !== "my_super_secret_token_123") {
+    return res.status(403).json({ error: "⛔ Sai token" });
   }
 
-  res.setHeader("Vary", "Origin");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  if (!url) {
+    return res.status(400).json({ error: "❌ Thiếu URL TikTok" });
   }
-
-  // 🔐 Token
-  if (!token || token !== secretToken) {
-    console.warn('⛔ Bị chặn: sai token:', token);
-    return res.status(403).json({ error: 'Forbidden - Invalid token' });
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { url } = req.body;
-  if (!url) return res.status(400).json({ code: 1, message: "Thiếu URL" });
-
-  const finalUrl = await followRedirect(url);
-  console.log("🔗 Final TikTok URL:", finalUrl);
 
   try {
-    const response = await axios.get('https://tiktok-download-video1.p.rapidapi.com/newGetVideo', {
-   params: {
-  url: finalUrl,
-  hd: '1'
-},
-
+    // Gọi RapidAPI để lấy link video
+    const apiRes = await axios.get("https://tiktok-download-video1.p.rapidapi.com/newGetVideo", {
+      params: { url, hd: "1" },
       headers: {
-        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'tiktok-download-video1.p.rapidapi.com'
-      }
+        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,   // 🔑 để trong Vercel Env
+        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com",
+      },
     });
 
-    console.log("📦 RapidAPI trả về:", JSON.stringify(response.data, null, 2));
-    const data = response.data?.data || {};
-    console.log("📦 RapidAPI data:", JSON.stringify(data, null, 2));
+    const data = apiRes.data?.data || {};
+    const videoUrl = data.hdplay || data.play || data.wmplay;
 
-    const videoHD = data.hdplay;
-    const videoSD = data.play;
-    const videoWM = data.wmplay;
-    const audio = data.music;
-    const downloadUrl = data.downloadUrl;
-
-    const list = [
-      ...(videoSD ? [{ url: videoSD, label: "Tải không watermark" }] : []),
-      ...(videoHD ? [{ url: videoHD, label: "Tải HD" }] : []),
-      ...(audio ? [{ url: audio, label: "Tải nhạc" }] : []),
-      ...(downloadUrl ? [{ url: downloadUrl, label: "Tải video (RapidAPI)" }] : [])
-    ];
-
-    if (list.length === 0) {
-      return res.status(200).json({ code: 2, message: "❌ Không lấy được video", raw: data });
+    if (!videoUrl) {
+      return res.status(500).json({ error: "❌ Không lấy được video" });
     }
 
-    return res.status(200).json({
-      code: 0,
-      data: list,
-      meta: {
-        thumbnail: data.cover,
-        description: data.description || data.title,
-        author: data.author?.nickname || data.author?.username || data.author?.unique_id || ''
-      }
-    });
+    // 👉 Stream lại video với header ép tải về Tệp
+    const videoStream = await axios.get(videoUrl, { responseType: "stream" });
+
+    res.setHeader("Content-Type", "video/mp4");
+    res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
+
+    videoStream.data.pipe(res);
   } catch (err) {
-    console.error("❌ Lỗi chi tiết:", err.response?.status, err.response?.data, err.message);
-    console.log('🔒 Token env server:', process.env.API_SECRET_TOKEN);
-    console.log('🔒 Token nhận được:', token);
-
-    return res.status(500).json({
-      code: 500,
-      message: "Lỗi server khi gọi RapidAPI",
-      error: err.response?.data || err.message
-    });
+    console.error("❌ Lỗi server:", err.response?.data || err.message);
+    return res.status(500).json({ error: "⚠️ Lỗi xử lý video" });
   }
-};
-
-export default handler;
+}
