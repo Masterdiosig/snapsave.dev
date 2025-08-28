@@ -9,16 +9,19 @@ app.get("/api/tiktok", async (req, res) => {
   const { url } = req.query;
   if (!url) return res.status(400).json({ error: "❌ Missing URL" });
 
-  try {
-    const apiUrl = `https://tiktok-download-video1.p.rapidapi.com/newGetVideo/vid/index?url=${encodeURIComponent(url)}`;
+   try {
+    const response = await axios.get('https://tiktok-download-video1.p.rapidapi.com/newGetVideo', {
+   params: {
+  url: finalUrl,
+  hd: '1'
+},
 
-    const apiRes = await fetch(apiUrl, {
-      method: "GET",
       headers: {
-        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
+        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+        'X-RapidAPI-Host': 'tiktok-download-video1.p.rapidapi.com'
       }
     });
+
 
     const data = await apiRes.json();
     console.log("📦 API response:", data);
