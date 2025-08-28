@@ -457,14 +457,22 @@ resultBox.innerHTML = `
   });
 
   // Force download
-  function forceDownload(url, filename) {
-    const a = document.createElement("a");
-    a.href = url;
-    a.setAttribute("download", filename || "video.mp4");
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
+ function forceDownload(url, filename) {
+  fetch(url)
+    .then(res => res.blob())
+    .then(blob => {
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename || "video.mp4";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(blobUrl);
+    })
+    .catch(err => console.error("Download error:", err));
+}
+
   </script>
 </body>
 </html>
