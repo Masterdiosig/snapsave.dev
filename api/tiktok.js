@@ -10,13 +10,13 @@ app.get("/api/tiktok", async (req, res) => {
   if (!url) return res.status(400).json({ error: "❌ Missing URL" });
 
   try {
-    const apiUrl = `https://tiktok-downloader-download-tiktok-videos.p.rapidapi.com/vid/index?url=${encodeURIComponent(url)}`;
+    const apiUrl = `https://tiktok-download-video1.p.rapidapi.com/newGetVideo/vid/index?url=${encodeURIComponent(url)}`;
 
     const apiRes = await fetch(apiUrl, {
       method: "GET",
       headers: {
         "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "tiktok-downloader-download-tiktok-videos.p.rapidapi.com"
+        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
       }
     });
 
