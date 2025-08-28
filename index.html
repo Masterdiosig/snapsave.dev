@@ -372,42 +372,41 @@
   });
 
     // Paste / Clear nút
-    pasteBtn.addEventListener("click", async () => {
-      if (pasteBtn.textContent === "Paste") {
-        try {
-          const text = await navigator.clipboard.readText();
-          if (text) {
-            input.value = text;
-            pasteBtn.textContent = "Clear";
-          }
-        } catch (err) {
-          console.error("Không thể đọc clipboard: ", err);
+pasteBtn.addEventListener("click", async () => {
+    if (pasteBtn.textContent === "Paste") {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          input.value = text;
+          pasteBtn.textContent = "Clear";
         }
-      } else {
-        input.value = "";
-        pasteBtn.textContent = "Paste";
-        input.focus();
+      } catch (err) {
+        console.error("Clipboard error:", err);
       }
-    });
-
-    input.addEventListener("input", () => {
-      if (!input.value.trim()) pasteBtn.textContent = "Paste";
-    });
+    } else {
+      input.value = "";
+      pasteBtn.textContent = "Paste";
+      input.focus();
+    }
   });
 
-  // Force download
-  function forceDownload(url, filename) {
-    const a = document.createElement("a");
-    a.href = url;
-    a.setAttribute("download", filename || "video.mp4");
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
+  input.addEventListener("input", () => {
+    if (!input.value.trim()) pasteBtn.textContent = "Paste";
+  });
 
   // Năm hiện tại
   document.getElementById("y").textContent = new Date().getFullYear();
- 
+});
+
+  // Force download
+function forceDownload(url, filename) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.setAttribute("download", filename || "video.mp4");
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
 
 <footer id="contact">
   <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
