@@ -102,6 +102,9 @@
 </form>
   <div id="resultBox"></div></section>
 
+
+
+
 <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -473,6 +476,8 @@ resultBox.innerHTML = `
     })
     .catch(err => console.error("Download error:", err));
 }
+
+
 // Hàm tải về file thẳng vào Tệp iPhone
 async function forceDownload(url, filename) {
   try {
@@ -485,7 +490,7 @@ async function forceDownload(url, filename) {
     const link = document.createElement("a");
     link.href = blobUrl;
     link.download = filename || "tiktok.mp4";
-    link.target = "_blank";
+    link.target = "_blank"; // tránh Safari mở tab mới
 
     document.body.appendChild(link);
     link.click();
@@ -498,26 +503,50 @@ async function forceDownload(url, filename) {
   }
 }
 
-// Lắng nghe submit form
+// Submit form
 document.getElementById("downloadForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const url = document.getElementById("urlInput").value;
+  const url = document.getElementById("tiktokUrl").value.trim();
   const resultBox = document.getElementById("resultBox");
 
-  // gọi API backend của bạn
-  const res = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
-  const data = await res.json();
+  if (!url) {
+    alert("Vui lòng nhập link TikTok!");
+    return;
+  }
 
-  if (data?.videoUrl && data?.thumbnail) {
-    resultBox.innerHTML = `
-      <img src="${data.thumbnail}" class="thumbnail">
-      <button onclick="forceDownload('${data.videoUrl}', 'tiktok.mp4')">⬇️ Tải video</button>
-    `;
-  } else {
-    resultBox.innerHTML = `<p>❌ Không lấy được video</p>`;
+  resultBox.innerHTML = `<p>⏳ Đang lấy video...</p>`;
+
+  try {
+    // gọi API backend
+    const res = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+
+    if (data?.videoUrl && data?.thumbnail) {
+      resultBox.innerHTML = `
+        <img src="${data.thumbnail}" class="thumbnail" alt="thumbnail">
+        <br>
+        <button onclick="forceDownload('${data.videoUrl}', 'tiktok.mp4')">⬇️ Lưu về Tệp</button>
+      `;
+    } else {
+      resultBox.innerHTML = `<p>❌ Không lấy được video</p>`;
+    }
+  } catch (err) {
+    console.error("Lỗi:", err);
+    resultBox.innerHTML = `<p>⚠️ Server không phản hồi</p>`;
   }
 });
+
+// Nút paste nhanh (nếu hỗ trợ)
+document.getElementById("pasteBtn").addEventListener("click", async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById("tiktokUrl").value = text;
+  } catch {
+    alert("Không đọc được clipboard, hãy dán thủ công.");
+  }
+});
+
 
   </script>
 </body>
