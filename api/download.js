@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function handler(req, res) {
   const { url } = req.query;
@@ -7,7 +7,9 @@ export default async function handler(req, res) {
   try {
     const response = await axios.get(url, {
       responseType: "stream",
-      headers: { "User-Agent": "Mozilla/5.0" }
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
     });
 
     res.setHeader("Content-Disposition", 'attachment; filename="video.mp4"');
