@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-   <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snapsave.dev - Tải video TikTok không watermark</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style copy.css">
 
 <!-- SEO Meta -->
 <title>SnapTik: Download TikTok Video without Watermark Fast & Free</title>
@@ -77,7 +77,7 @@
 </head>
 <body>
   <!-- Menu -->
-   <nav class="navbar">
+  <nav class="navbar">
     <div class="nav-logo">Snapsave.dev</div>
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
@@ -88,21 +88,19 @@
   </nav>
 
   <!-- Header -->
- <header class="header">
+  <header class="header">
     <h1><span class="logo">Snapsave.dev</span></h1>
     <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
-<!-- Form download -->
-  <form id="downloadForm">
-    <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
-    <button type="submit">Tải xuống</button>
-    <button type="button" id="pasteBtn">Paste</button>
-  </form>
-
+  <!-- Form download -->
+<form id="downloadForm" class="download-form">
+  <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
+  <button type="submit">Tải xuống</button>
+  <button type="button" id="pasteBtn">Paste</button>
+</form>
   <div id="resultBox"></div>
-  
-<script src="main.js"></script>
+
 <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -230,7 +228,7 @@
       và yêu công nghệ. Hãy truy cập Snapsave.dev ngay để trải nghiệm!</p>
   </div>
 
-  <!-- English -->
+<!-- English -->
   <div class="lang-block" lang="en">
     <h2>Snapsave.dev: TikTok Video Downloader for Young People</h2>
     <p>TikTok – the most popular video social network today, where young people 
@@ -299,7 +297,8 @@
     </section>
     </main>
 
-<footer id="contact">
+  <!-- Footer -->
+  <footer id="contact">
     <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
     <nav>
       <a href="terms.html">Điều khoản</a> | 
@@ -308,37 +307,18 @@
     </nav>
   </footer>
 
-    <script>
+  <script>
   // Toggle menu
   document.querySelector(".nav-toggle").addEventListener("click", () => {
     document.querySelector(".nav-links").classList.toggle("show");
   });
- // FAQ toggle
+
+  // FAQ toggle
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', () => btn.parentElement.classList.toggle('active'));
   });
 
-  const menuBtn = document.querySelector('.menu');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-  });
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-  });
-
-  // Sample buttons (ví dụ demo url sẵn)
-  document.querySelectorAll('.sample').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById('tiktokUrl').value = btn.dataset.url;
-      document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
-    });
-  });
-
-// Form submit
+  // Form submit
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("downloadForm");
     const input = document.getElementById("tiktokUrl");

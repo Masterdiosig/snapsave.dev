@@ -17,16 +17,59 @@ body {
 
 /* Navbar */
 .navbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem; background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1000;
 }
-.nav-logo { font-size: 1.2rem; font-weight: 700; }
-.nav-links { list-style: none; display: none; flex-direction: column; }
-.nav-links li { margin: 0.5rem 0; }
-.nav-links a { color: #fff; text-decoration: none; font-weight: 500; }
-.nav-links.show { display: flex; }
-.nav-toggle { font-size: 1.5rem; cursor: pointer; }
 
+.nav-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+/* Toggle icon (hamburger) */
+.nav-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #fff;
+  display: block;
+}
+/* Links mặc định ẩn trên mobile */
+.nav-links {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background: rgba(0,0,0,0.9);
+  border-radius: 8px;
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 180px;
+}
+.nav-links li {
+  text-align: right;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: #ffcc70;
+}
+
+.nav-links.show {
+  display: flex;
+}
 /* Header */
 .header { text-align: center; padding: 2rem 1rem; }
 .logo {
@@ -84,3 +127,74 @@ footer {
   background: rgba(0,0,0,0.2);
 }
 footer nav a { color: #fff; margin: 0 0.5rem; text-decoration: none; }
+/* Form container */
+.download-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 1rem auto;
+}
+
+/* Input */
+.download-form input {
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+}
+
+/* Buttons */
+.download-form button {
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: #6a5af9;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+}
+.download-form button:hover {
+  background: #4b3de0;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .download-form {
+    padding: 0.8rem;
+    gap: 0.5rem;
+    width: 90%;
+  }
+  .download-form input, 
+  .download-form button {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+}
+/* Desktop */
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
+    gap: 1.5rem;
+  }
+
+  .nav-links li {
+    margin: 0;
+    text-align: left;
+  }
+}
