@@ -200,3 +200,31 @@ footer nav a { color: #fff; margin: 0 0.5rem; text-decoration: none; }
     text-align: left;
   }
 }
+
+
+#resultBox {
+  margin-top: 1rem;
+  text-align: center;   /* căn giữa nội dung */
+}
+
+#resultBox img.thumbnail {
+  max-width: 240px;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+#resultBox button {
+  display: inline-block;
+  margin: 0.3rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #6a5af9;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#resultBox button:hover {
+  background: #4b3de0;
+}
