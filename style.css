@@ -228,3 +228,12 @@ footer nav a { color: #fff; margin: 0 0.5rem; text-decoration: none; }
 #resultBox button:hover {
   background: #4b3de0;
 }
+/* Container cho form + kết quả */
+.download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* căn giữa ngang */
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
