@@ -21,11 +21,14 @@ app.get("/api/tiktok", async (req, res) => {
 
   try {
     // gọi sang RapidAPI / yt-dlp server của bạn
-    const apiRes = await fetch("https://your-yt-dlp-server.com/download", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url })
-    });
+ const apiRes = await fetch("https://tiktok-downloader-download-tiktok-videos.p.rapidapi.com/vid/index?url=" + encodeURIComponent(url), {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+    "X-RapidAPI-Host": "tiktok-downloader-download-tiktok-videos.p.rapidapi.com"
+  }
+});
+
 
     const data = await apiRes.json();
 

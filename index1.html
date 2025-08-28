@@ -405,14 +405,9 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBox.innerHTML = "⏳ Đang xử lý...";
 
     try {
-  form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const url = input.value.trim();
-  if (!url) return alert("Vui lòng nhập link TikTok.");
-
-  // Chuyển hướng thẳng sang API (server sẽ redirect sang file mp4)
-  window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
-});
+const res = await fetch("/api/tiktok", { method: "POST", 
+headers: { "Content-Type": "application/json", "Authorization": 
+"Bearer my_super_secret_token_123", }, body: JSON.stringify({ url }), });
 
 
       const data = await res.json();
