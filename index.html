@@ -331,45 +331,45 @@
 
   // Download form
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("downloadForm");
-    const input = document.getElementById("tiktokUrl");
-    const resultBox = document.getElementById("resultBox");
-    const pasteBtn = document.getElementById("pasteBtn");
+  const form = document.getElementById("downloadForm");
+  const input = document.getElementById("tiktokUrl");
+  const resultBox = document.getElementById("resultBox");
+  const pasteBtn = document.getElementById("pasteBtn");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const url = input.value.trim();
-      if (!url) return alert("Vui lòng nhập link TikTok.");
-      resultBox.innerHTML = "⏳ Đang xử lý...";
+    e.preventDefault();
+    const url = input.value.trim();
+    if (!url) return alert("Vui lòng nhập link TikTok.");
+    resultBox.innerHTML = "⏳ Đang xử lý...";
 
-      try {
-        const res = await fetch("/api/tiktok", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer my_super_secret_token_123"
-          },
-          body: JSON.stringify({ url })
-        });
-        const data = await res.json();
-        console.log("API trả về:", data);
+     try {
+      const res = await fetch("/api/tiktok", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer my_super_secret_token_123"
+        },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      console.log("API trả về:", data);
 
-        if (!data.video) {
-          resultBox.innerHTML = "❌ Không lấy được video.";
-          return;
-        }
-
-        resultBox.innerHTML = `
-          ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
-          ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
-          ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
-          <button class="button-go" onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
-        `;
-      } catch (err) {
-        console.error(err);
-        resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
+      if (!data.video) {
+        resultBox.innerHTML = "❌ Không lấy được video.";
+        return;
       }
-    });
+
+      resultBox.innerHTML = `
+        ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
+        ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
+        ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+        <button class="button-go" onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
+      `;
+    } catch (err) {
+      console.error(err);
+      resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
+    }
+  });
 
     // Paste / Clear nút
     pasteBtn.addEventListener("click", async () => {
