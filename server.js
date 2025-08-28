@@ -42,6 +42,7 @@ app.post("/api/tiktok", async (req, res) => {
     };
 
     const response = await axios.request(options);
+    console.log("✅ API trả về:", response.data);
     const data = response.data;
 
     if (!data || !data.data || !data.data[0]?.url) {
