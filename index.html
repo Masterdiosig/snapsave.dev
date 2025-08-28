@@ -101,9 +101,7 @@
   </form>
 
   <div id="resultBox"></div>
-  <footer>© <span id="y"></span></footer>
 
-<script src="main.js"></script>
 <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -300,29 +298,12 @@
     </section>
     </main>
 
-      <!-- Footer -->
-<!-- Footer -->
-  <footer id="contact">
-    <p>&copy; 2025 Snapsave.dev. All rights reserved.</p>
-    <nav>
-      <a href="terms.html">Điều khoản</a> | 
-      <a href="privacy.html">Chính sách</a> | 
-      <a href="contact.html">Liên hệ</a>
-    </nav>
-  </footer>
-
+<script src="main.js"></script>
   <script>
-    // Toggle menu mobile
     document.querySelector(".nav-toggle").addEventListener("click", () => {
       document.querySelector(".nav-links").classList.toggle("show");
     });
-  </script>
-</body>
-</html>
-  
-<!-- JS -->
-  <script>
-  // Menu toggle
+
   const menuBtn = document.querySelector('.menu');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
@@ -335,19 +316,18 @@
     overlay.classList.remove('active');
   });
 
-  // FAQ toggle
+  // FAQ toggle (nếu có)
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', () => btn.parentElement.classList.toggle('active'));
   });
 
-  // Sample buttons
+  // Sample buttons (ví dụ demo url sẵn)
   document.querySelectorAll('.sample').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('tiktokUrl').value = btn.dataset.url;
       document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
     });
   });
-
 
   // Download form
   document.addEventListener("DOMContentLoaded", () => {
@@ -429,4 +409,13 @@
   document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
-</html>
+</html> 
+
+  <footer id="contact">
+    <p>&copy; 2025 Snapsave.dev. All rights reserved.</p>
+    <nav>
+      <a href="terms.html">Điều khoản</a> | 
+      <a href="privacy.html">Chính sách</a> | 
+      <a href="contact.html">Liên hệ</a>
+    </nav>
+  </footer>
