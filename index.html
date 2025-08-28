@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snapsave.dev - Tải video TikTok</title>
+  <title>Snapsave.dev - Tải video TikTok không watermark</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
@@ -77,7 +77,7 @@
 </head>
 <body>
   <!-- Menu -->
-  <nav class="navbar">
+   <nav class="navbar">
     <div class="nav-logo">Snapsave.dev</div>
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
@@ -88,129 +88,21 @@
   </nav>
 
   <!-- Header -->
-  <header class="header">
+ <header class="header">
     <h1><span class="logo">Snapsave.dev</span></h1>
     <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
 <!-- Form download -->
- <form id="downloadForm">
-  <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
-  <button type="submit">Tải xuống</button>
-  <button type="button" id="pasteBtn">Paste</button>
-</form>
+  <form id="downloadForm">
+    <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
+    <button type="submit">Tải xuống</button>
+    <button type="button" id="pasteBtn">Paste</button>
+  </form>
 
-<div id="resultBox"></div>
+  <div id="resultBox"></div>
+  
 <script src="main.js"></script>
-  <script>
-    document.querySelector(".nav-toggle").addEventListener("click", () => {
-      document.querySelector(".nav-links").classList.toggle("show");
-    });
-
-  const menuBtn = document.querySelector('.menu');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-  });
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-  });
-
-  // FAQ toggle (nếu có)
-  document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => btn.parentElement.classList.toggle('active'));
-  });
-
-  // Sample buttons (ví dụ demo url sẵn)
-  document.querySelectorAll('.sample').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById('tiktokUrl').value = btn.dataset.url;
-      document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
-    });
-  });
-
-  // Download form
-  document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("downloadForm");
-  const input = document.getElementById("tiktokUrl");
-  const resultBox = document.getElementById("resultBox");
-  const pasteBtn = document.getElementById("pasteBtn");
-
-    form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const url = input.value.trim();
-    if (!url) return alert("Vui lòng nhập link TikTok.");
-    resultBox.innerHTML = "⏳ Đang xử lý...";
-
-     try {
-      const res = await fetch("/api/tiktok", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer my_super_secret_token_123"
-        },
-        body: JSON.stringify({ url })
-      });
-      const data = await res.json();
-      console.log("API trả về:", data);
-
-      if (!data.video) {
-        resultBox.innerHTML = "❌ Không lấy được video.";
-        return;
-      }
-
-      resultBox.innerHTML = `
-        ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
-        ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
-        ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
-        <button class="button-go" onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
-      `;
-    } catch (err) {
-      console.error(err);
-      resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
-    }
-  });
-
-    // Paste / Clear nút
-pasteBtn.addEventListener("click", async () => {
-    if (pasteBtn.textContent === "Paste") {
-      try {
-        const text = await navigator.clipboard.readText();
-        if (text) {
-          input.value = text;
-          pasteBtn.textContent = "Clear";
-        }
-      } catch (err) {
-        console.error("Clipboard error:", err);
-      }
-    } else {
-      input.value = "";
-      pasteBtn.textContent = "Paste";
-      input.focus();
-    }
-  });
-
-  input.addEventListener("input", () => {
-    if (!input.value.trim()) pasteBtn.textContent = "Paste";
-  });
-
-  // Năm hiện tại
-  document.getElementById("y").textContent = new Date().getFullYear();
-});
-
-  // Force download
-function forceDownload(url, filename) {
-  const a = document.createElement("a");
-  a.href = url;
-  a.setAttribute("download", filename || "video.mp4");
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-</script>
 <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -407,15 +299,123 @@ function forceDownload(url, filename) {
     </section>
     </main>
 
-
 <footer id="contact">
-  <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
-  <nav>
-    <a href="terms.html">Điều khoản</a> | 
-    <a href="privacy.html">Chính sách</a> | 
-    <a href="contact.html">Liên hệ</a>
-  </nav>
-</footer>
+    <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
+    <nav>
+      <a href="terms.html">Điều khoản</a> | 
+      <a href="privacy.html">Chính sách</a> | 
+      <a href="contact.html">Liên hệ</a>
+    </nav>
+  </footer>
 
+    <script>
+  // Toggle menu
+  document.querySelector(".nav-toggle").addEventListener("click", () => {
+    document.querySelector(".nav-links").classList.toggle("show");
+  });
+ // FAQ toggle
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('active'));
+  });
+
+  const menuBtn = document.querySelector('.menu');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  // Sample buttons (ví dụ demo url sẵn)
+  document.querySelectorAll('.sample').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('tiktokUrl').value = btn.dataset.url;
+      document.getElementById('downloadForm').dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
+    });
+  });
+
+// Form submit
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("downloadForm");
+    const input = document.getElementById("tiktokUrl");
+    const resultBox = document.getElementById("resultBox");
+    const pasteBtn = document.getElementById("pasteBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const url = input.value.trim();
+      if (!url) return alert("Vui lòng nhập link TikTok.");
+      resultBox.innerHTML = "⏳ Đang xử lý...";
+
+      try {
+        const res = await fetch("/api/tiktok", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer my_super_secret_token_123"
+          },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        console.log("API trả về:", data);
+
+        if (!data.video) {
+          resultBox.innerHTML = "❌ Không lấy được video.";
+          return;
+        }
+
+        resultBox.innerHTML = `
+          ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
+          ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
+          ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
+          <button onclick="forceDownload('${data.video}', '${data.filename}')">⬇️ Tải video</button>
+        `;
+      } catch (err) {
+        console.error(err);
+        resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
+      }
+    });
+
+    // Nút paste/clear
+    pasteBtn.addEventListener("click", async () => {
+      if (pasteBtn.textContent === "Paste") {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (text) {
+            input.value = text;
+            pasteBtn.textContent = "Clear";
+          }
+        } catch (err) {
+          console.error("Clipboard error:", err);
+        }
+      } else {
+        input.value = "";
+        pasteBtn.textContent = "Paste";
+        input.focus();
+      }
+    });
+
+    input.addEventListener("input", () => {
+      if (!input.value.trim()) pasteBtn.textContent = "Paste";
+    });
+
+    // Cập nhật năm
+    document.getElementById("y").textContent = new Date().getFullYear();
+  });
+
+  // Force download
+  function forceDownload(url, filename) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.setAttribute("download", filename || "video.mp4");
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  </script>
 </body>
 </html>
