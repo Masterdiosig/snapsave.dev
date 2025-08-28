@@ -378,41 +378,18 @@ If the link is new, it may take 1–2 seconds the first time.
   </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("downloadForm");
+const form = document.getElementById("downloadForm");
   const input = document.getElementById("tiktokUrl");
-  const pasteBtn = document.getElementById("pasteBtn");
 
-  // Submit form
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const url = input.value.trim();
     if (!url) return alert("Vui lòng nhập link TikTok");
-    
-// ✅ Safari iPhone sẽ tải thẳng file
+
+    // ✅ Safari iPhone sẽ tải thẳng file
     const token = "my_super_secret_token_123";
     window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=${token}`;
   });
-
-  // Nút paste/clear
-  pasteBtn.addEventListener("click", async () => {
-    if (pasteBtn.textContent === "Paste") {
-      try {
-        const text = await navigator.clipboard.readText();
-        if (text) {
-          input.value = text;
-          pasteBtn.textContent = "Clear";
-        }
-      } catch (err) {
-        console.error("Clipboard error:", err);
-      }
-    } else {
-      input.value = "";
-      pasteBtn.textContent = "Paste";
-      input.focus();
-    }
-  });
-});
 </script>
 
 </body>
