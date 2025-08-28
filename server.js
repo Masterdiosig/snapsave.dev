@@ -1,52 +1,47 @@
 import express from "express";
-import axios from "axios";
-import dotenv from "dotenv";
+import fetch from "node-fetch";
+import cors from "cors";
 
-dotenv.config();
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static("public"));
+app.use(cors());
+app.use(express.json());
 
-// API download (GET thay vì POST)
+// API tải TikTok
 app.get("/api/tiktok", async (req, res) => {
-  const videoUrl = req.query.url;
-  if (!videoUrl) {
-    return res.status(400).send("❌ Thiếu URL TikTok");
+  const { url, token } = req.query;
+
+  // ✅ kiểm tra token
+  if (token !== "my_super_secret_token_123") {
+    return res.status(403).send("⛔ Sai token");
   }
 
+  if (!url) return res.status(400).send("❌ Thiếu URL TikTok");
+
   try {
-    const options = {
+    // gọi sang RapidAPI / yt-dlp server của bạn
+    const apiRes = await fetch("https://your-yt-dlp-server.com/download", {
       method: "POST",
-      url: "https://tiktok-download-video1.p.rapidapi.com/newGetVideo",
-      headers: {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
-      },
-      data: { url: videoUrl }
-    };
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    });
 
-    const response = await axios.request(options);
-    const data = response.data;
+    const data = await apiRes.json();
 
-    if (!data || !data.data || !data.data[0]?.url) {
+    if (!data?.videoUrl) {
       return res.status(500).send("❌ Không lấy được link video");
     }
 
-    const directLink = data.data[0].url;
+    // ✅ redirect thẳng tới file mp4 (Safari sẽ tải về Tệp)
+    res.redirect(data.videoUrl);
 
-    // Stream video về client
-    const videoStream = await axios.get(directLink, { responseType: "stream" });
-    res.setHeader("Content-Disposition", 'attachment; filename="tiktok.mp4"');
-    res.setHeader("Content-Type", "video/mp4");
-    videoStream.data.pipe(res);
   } catch (err) {
-    console.error("⚠️ Error:", err.message);
-    res.status(500).send("⚠️ Không tải được video");
+    console.error(err);
+    res.status(500).send("⚠️ Lỗi xử lý video");
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server chạy tại http://localhost:${PORT}`);
+  console.log("✅ Server chạy tại http://localhost:" + PORT);
 });

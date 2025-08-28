@@ -389,8 +389,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = input.value.trim();
     if (!url) return alert("Vui lòng nhập link TikTok");
     
-    // 👉 Redirect sang API => Safari sẽ tải xuống luôn
-    window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}`;
+// ✅ Safari iPhone sẽ tải thẳng file
+    const token = "my_super_secret_token_123";
+    window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=${token}`;
   });
 
   // Nút paste/clear
