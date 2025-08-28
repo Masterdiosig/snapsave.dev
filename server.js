@@ -1,13 +1,15 @@
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
-app.use(express.static("public"));
 
 dotenv.config();
+
 const app = express();
 const PORT = 3000;
 
+// Middleware
 app.use(express.json());
+app.use(express.static("public"));
 
 // Trang chủ test form
 app.get("/", (req, res) => {
@@ -48,7 +50,7 @@ app.post("/api/tiktok", async (req, res) => {
 
     const directLink = data.data[0].url;
 
-    // Stream về client (Safari sẽ lưu vào Tệp)
+    // Stream về client
     const videoStream = await axios.get(directLink, { responseType: "stream" });
     res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
     res.setHeader("Content-Type", "video/mp4");

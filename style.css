@@ -31,6 +31,7 @@ body {
   font-weight: 700;
   color: #fff;
 }
+
 /* Toggle icon (hamburger) */
 .nav-toggle {
   font-size: 1.8rem;
@@ -38,6 +39,7 @@ body {
   color: #fff;
   display: block;
 }
+
 /* Links mặc định ẩn trên mobile */
 .nav-links {
   list-style: none;
