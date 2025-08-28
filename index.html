@@ -93,16 +93,18 @@
     <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
-  <!-- Form -->
-  <main>
-    <form class="download-form">
-      <input type="text" placeholder="Dán link TikTok vào đây..." aria-label="Link video TikTok">
-      <button type="submit">Tải xuống</button>
-    </form>
+  <form id="downloadForm" class="download-form">
+  <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." aria-label="Link video TikTok">
+  <button type="submit">Tải xuống</button>
+</form>
+
+<!-- Nơi hiển thị kết quả -->
+<div id="resultBox"></div>
+
   
     </section>
 
-
+<script src="main.js"></script>
 <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -494,7 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   document.getElementById("y").textContent = new Date().getFullYear();
   </script>
-  <script src="main.js"></script>
+  
 </body>
 </html>
 
