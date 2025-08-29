@@ -26,17 +26,25 @@ body {
   z-index: 1000;
 }
 
+
 .nav-logo {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
+  font-size: 1.5rem;    
+  font-weight: 800; 
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(45deg, #ff0050, #7928ca); 
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent; 
+  user-select: none;
+  letter-spacing: -0.5px;
 }
+
+
 
 /* Toggle icon (hamburger) */
 .nav-toggle {
   font-size: 1.8rem;
   cursor: pointer;
-  color: #fff;
+  color: lch(96.46% 97.01 105.08);
   display: block;
 }
 
@@ -74,6 +82,8 @@ body {
 }
 /* Header */
 .header { text-align: center; padding: 2rem 1rem; }
+
+
 .logo {
   font-size: 2.2rem; font-weight: 800;
   background: linear-gradient(90deg,#6a5af9,#ff5c8a,#42d392,#ffcc70);
@@ -82,6 +92,23 @@ body {
   -webkit-text-fill-color: transparent;
   animation: logoGradient 6s ease infinite;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121212;
+    color: #eee;
+  }
+  .container {
+    background: #1e1e1e;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  }
+  input, button {
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+  }
+}
+
 @keyframes logoGradient {
   0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
 }
