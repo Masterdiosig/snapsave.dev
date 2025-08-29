@@ -8,35 +8,45 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Lấy link TikTok
 app.post("/api/tiktok", async (req, res) => {
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "❌ Thiếu URL TikTok" });
 
   try {
-    // Gọi sang RapidAPI
-    const apiRes = await fetch("https://tiktok-download-video1.p.rapidapi.com/newGetVideo?url=" + encodeURIComponent(url), {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
+    const apiRes = await fetch(
+      "https://tiktok-download-video1.p.rapidapi.com/newGetVideo?url=" + encodeURIComponent(url) + "&hd=1",
+      {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY || "YOUR_RAPIDAPI_KEY_HERE",
+          "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
+        }
       }
-    });
+    );
 
     const data = await apiRes.json();
-    if (!data?.data) return res.status(500).json({ error: "❌ Không lấy được video" });
+    console.log("📦 RapidAPI trả về:", data);
 
-    const videoUrl = data.data.hdplay || data.data.play;
-    if (!videoUrl) return res.status(500).json({ error: "❌ Không có link tải" });
+    const videoHD = data?.data?.hdplay;
+    const videoSD = data?.data?.play;
+    const videoWM = data?.data?.wmplay;
+
+    const videoUrl = videoHD || videoSD || videoWM;
+
+    if (!videoUrl) {
+      return res.status(500).json({ error: "❌ Không lấy được video", raw: data });
+    }
 
     // Trả ra cả 2 link
     return res.json({
-      directUrl: videoUrl, // mở tab trực tiếp
-      serverUrl: `/api/redirect?url=${encodeURIComponent(videoUrl)}` // tải qua server
+      directUrl: videoUrl,
+      serverUrl: `/api/redirect?url=${encodeURIComponent(videoUrl)}`
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "⚠️ Lỗi server" });
+    console.error("❌ Lỗi server:", err);
+    res.status(500).json({ error: "⚠️ Lỗi khi gọi RapidAPI", message: err.message });
   }
 });
 
@@ -50,4 +60,5 @@ app.get("/api/redirect", (req, res) => {
 app.listen(PORT, () => {
   console.log("✅ Server chạy tại http://localhost:" + PORT);
 });
+
 
