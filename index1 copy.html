@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tải video TikTok</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f8f9fa;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    button {
+      background: #ff0050;
+      border: none;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #e60046;
+    }
+    #status {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>⬇️ Tải video TikTok</h2>
+    <form id="downloadForm">
+      <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
+   
+      <button type="submit">Tải ngay</button>
+    </form>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("downloadForm");
+    const input = document.getElementById("tiktokUrl");
+    const statusBox = document.getElementById("status");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const url = input.value.trim();
+      if (!url) {
+        alert("❌ Vui lòng nhập link TikTok");
+        return;
+      }
+
+      statusBox.textContent = "⏳ Đang xử lý...";
+
+      // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
+      window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
+
+      // Hiện thông báo (trong khi Safari tải)
+      setTimeout(() => {
+        statusBox.textContent = "✅ Nếu không thấy tải, hãy kiểm tra lại link TikTok.";
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
