@@ -12,7 +12,7 @@ app.use(express.json());
 app.get("/api/tiktok", async (req, res) => {
   const { url, token } = req.query;
 
-  // 🔑 check token
+  // ✅ kiểm tra token
   if (token !== "my_super_secret_token_123") {
     return res.status(403).send("⛔ Sai token");
   }
@@ -20,40 +20,34 @@ app.get("/api/tiktok", async (req, res) => {
   if (!url) return res.status(400).send("❌ Thiếu URL TikTok");
 
   try {
-    // ✅ gọi RapidAPI
+    // Gọi RapidAPI (hoặc yt-dlp server của bạn)
     const apiRes = await fetch("https://tiktok-download-video1.p.rapidapi.com/newGetVideo?" + new URLSearchParams({
-      url: url,
+      url,
       hd: "1"
     }), {
       method: "GET",
       headers: {
-        "x-rapidapi-key": process.env.RAPIDAPI_KEY || "your_rapidapi_key",
-        "x-rapidapi-host": "tiktok-download-video1.p.rapidapi.com"
+        "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
       }
     });
 
-    const json = await apiRes.json();
-    const videoUrl = json?.data?.hdplay || json?.data?.play;
+    const data = await apiRes.json();
 
-    if (!videoUrl) {
+    if (!data?.data?.hdplay && !data?.data?.play) {
       return res.status(500).send("❌ Không lấy được link video");
     }
 
-    // ✅ set header để Safari tải về thẳng Tệp
+    // ✅ Ưu tiên HD, fallback SD
+    const videoUrl = data.data.hdplay || data.data.play;
+
+    // ⚡ Redirect thẳng tới TikTok CDN (Safari sẽ tải vào Tệp cực nhanh)
     res.setHeader("Content-Disposition", 'attachment; filename="tiktok.mp4"');
-    res.setHeader("Content-Type", "video/mp4");
-
-    // ✅ stream video từ TikTok → client
-  // ✅ thay vì stream qua server, redirect thẳng
-res.setHeader("Content-Disposition", 'attachment; filename="tiktok.mp4"');
-res.redirect(videoUrl);
-
-
-    videoRes.body.pipe(res);
+    return res.redirect(videoUrl);
 
   } catch (err) {
     console.error("❌ Lỗi:", err);
-    res.status(500).send("⚠️ Lỗi server khi xử lý video");
+    res.status(500).send("⚠️ Lỗi xử lý video");
   }
 });
 
