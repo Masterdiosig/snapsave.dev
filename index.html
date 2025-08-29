@@ -422,7 +422,10 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
         return;
       }
 
-      statusBox.textContent = "⏳ Đang xử lý...";
+      statusBox.textContent = "⏳ Đang chuẩn bị file...";
+setTimeout(() => {
+  statusBox.textContent = "📥 Safari sẽ hiện popup lưu video → chọn 'Lưu vào Tệp'";
+}, 1500);
 
       // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
       window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
