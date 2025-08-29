@@ -27,24 +27,15 @@
     <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
+  <section class="download-section">
   <div class="container">
     <form id="downloadForm" class="download-form">
       <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
       <button type="submit">⬇️ Tải video</button>
+    <button type="button" id="pasteBtn">Paste</button>
     </form>
     <div id="status"></div>
   </div>
-
-  <!-- Form download -->
-   <section class="download-section">
-  <div class="container">
-<form id="downloadForm" class="download-form"> 
-  <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
-  <button type="submit">⬇️ Tải video</button>
-  <button type="button" id="pasteBtn">Paste</button>
-</form>
-  <div id="status"></div>
-</div>
 </section>
 
   <!-- Features -->
@@ -321,6 +312,19 @@ If the link is new, it may take 1–2 seconds the first time.
   
   
   <script>
+
+    // Toggle menu
+document.querySelector(".nav-toggle").addEventListener("click", () => {
+  document.querySelector(".nav-links").classList.toggle("show");
+});
+
+// FAQ toggle
+document.querySelectorAll(".faq-question").forEach((btn) => {
+  btn.addEventListener("click", () =>
+    btn.parentElement.classList.toggle("active")
+  );
+});
+
     const form = document.getElementById("downloadForm");
     const input = document.getElementById("tiktokUrl");
     const statusBox = document.getElementById("status");
@@ -362,6 +366,25 @@ If the link is new, it may take 1–2 seconds the first time.
       input.focus();
     }
   });
+
+  // Nếu xoá input thì nút trở về "Paste"
+  input.addEventListener("input", () => {
+    if (!input.value.trim()) pasteBtn.textContent = "Paste";
+  });
+
+ // Khi DOM sẵn sàng
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("downloadForm");
+  const input = document.getElementById("tiktokUrl");
+  const resultBox = document.getElementById("resultBox");
+  const pasteBtn = document.getElementById("pasteBtn"); 
+
+
+  // Cập nhật năm footer
+  document.getElementById("y").textContent = new Date().getFullYear();
+});
+
+
 
   </script>
 </body>
