@@ -93,21 +93,7 @@ body {
   animation: logoGradient 6s ease infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #121212;
-    color: #eee;
-  }
-  .container {
-    background: #1e1e1e;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  }
-  input, button {
-    background: #2a2a2a;
-    color: #fff;
-    border: 1px solid #444;
-  }
-}
+
 
 @keyframes logoGradient {
   0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
