@@ -418,39 +418,28 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
   );
 });
 
-     const form = document.getElementById("downloadForm");
-  const input = document.getElementById("tiktokUrl");
-  const resultBox = document.getElementById("resultBox");
+   const form = document.getElementById("downloadForm");
+    const input = document.getElementById("tiktokUrl");
+    const statusBox = document.getElementById("status");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const url = input.value.trim();
-    if (!url) return alert("❌ Vui lòng nhập link");
-
-    resultBox.innerHTML = "⏳ Đang xử lý...";
-
-    try {
-      const res = await fetch("/api/tiktok", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url })
-      });
-      const data = await res.json();
-      console.log(data);
-
-      if (!data.directUrl) {
-        resultBox.innerHTML = "❌ Không lấy được video";
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const url = input.value.trim();
+      if (!url) {
+        alert("❌ Vui lòng nhập link TikTok");
         return;
       }
-resultBox.innerHTML = `
-        <button onclick="window.open('${data.directUrl}', '_blank')">⚡ Tải trực tiếp</button>
-        <button onclick="window.location.href='${data.serverUrl}'">🖥 Tải qua server</button>
-      `;
-    } catch (err) {
-      console.error(err);
-      resultBox.innerHTML = "⚠️ Lỗi kết nối server";
-    }
-  });
+
+      statusBox.textContent = "⏳ Đang xử lý...";
+
+      // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
+      window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
+
+      // Hiện thông báo (trong khi Safari tải)
+      setTimeout(() => {
+        statusBox.textContent = "✅ Nếu không thấy tải, hãy kiểm tra lại link TikTok.";
+      }, 2000);
+    });
 
   
 // Nút paste/clear
