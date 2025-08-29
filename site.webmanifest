@@ -1,1 +1,26 @@
 
+{
+  "name": "SnapSave",
+  "short_name": "SnapSave",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff0050",
+  "icons": [
+    {
+      "src": "/logo_32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo_180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
