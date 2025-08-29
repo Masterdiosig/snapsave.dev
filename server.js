@@ -44,8 +44,10 @@ app.get("/api/tiktok", async (req, res) => {
     res.setHeader("Content-Type", "video/mp4");
 
     // ✅ stream video từ TikTok → client
-    const videoRes = await fetch(videoUrl);
-    if (!videoRes.ok) throw new Error("Không stream được video");
+  // ✅ thay vì stream qua server, redirect thẳng
+res.setHeader("Content-Disposition", 'attachment; filename="tiktok.mp4"');
+res.redirect(videoUrl);
+
 
     videoRes.body.pipe(res);
 
