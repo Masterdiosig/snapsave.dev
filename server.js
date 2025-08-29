@@ -19,7 +19,7 @@ app.post("/api/tiktok", async (req, res) => {
       {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY || "YOUR_RAPIDAPI_KEY_HERE",
+          "X-RapidAPI-Key": process.env.RAPIDAPI_KEY || "YOUR_RAPIDAPI_KEY",
           "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
         }
       }
