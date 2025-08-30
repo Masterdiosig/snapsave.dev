@@ -51,7 +51,8 @@ app.get("/api/tiktok", async (req, res) => {
       }
     );
 
-    console.log(JSON.stringify(apiRes.data, null, 2));
+    // 🔹 Log debug toàn bộ response
+    console.log("✅ API trả về:", JSON.stringify(apiRes.data, null, 2));
 
     const data = apiRes.data?.data?.[0];
     if (!data) return res.status(500).json({ error: "❌ API không trả dữ liệu video" });
@@ -71,7 +72,6 @@ app.get("/api/tiktok", async (req, res) => {
       videoCache[videoId] = { filePath: tempPath, expiresAt: Date.now() + 10 * 60 * 1000 };
       console.log("✅ Video lưu cache:", videoId);
 
-      // Trả file cho client
       res.download(tempPath, "tiktok.mp4");
     });
 
