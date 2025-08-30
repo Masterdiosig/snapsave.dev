@@ -427,22 +427,23 @@ form.addEventListener("submit", async (e) => {
   statusBox.textContent = "⏳ Đang xử lý...";
 
   try {
-    // Gọi API server trả direct link
-    const resp = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`);
-    const data = await resp.json();
-
-    if (!data.downloadUrl) {
-      statusBox.textContent = "❌ Không lấy được video";
+    const token = "my_super_secret_token_123";
+    const resp = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}&token=${token}`);
+    
+    if (!resp.ok) {
+      const errData = await resp.json();
+      statusBox.textContent = errData.error || "❌ Lỗi khi tải video";
       return;
     }
 
-    // Tạo <a> tự click tải video
+    const blob = await resp.blob();
+    const downloadUrl = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
-    a.href = data.downloadUrl;
+    a.href = downloadUrl;
     a.download = "tiktok.mp4";
-    document.body.appendChild(a);
     a.click();
-    a.remove();
+    URL.revokeObjectURL(downloadUrl);
 
     statusBox.textContent = "✅ Video sẵn sàng tải!";
   } catch (err) {
@@ -450,6 +451,7 @@ form.addEventListener("submit", async (e) => {
     statusBox.textContent = "⚠️ Lỗi khi tải video";
   }
 });
+
 
 // Nút paste/clear
   pasteBtn.addEventListener("click", async () => {
