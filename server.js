@@ -51,6 +51,8 @@ app.get("/api/tiktok", async (req, res) => {
       }
     );
 
+    console.log(JSON.stringify(apiRes.data, null, 2));
+
     const data = apiRes.data?.data?.[0];
     if (!data) return res.status(500).json({ error: "❌ API không trả dữ liệu video" });
 
