@@ -415,7 +415,7 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
   );
 });
 
-   const form = document.getElementById("downloadForm");
+const form = document.getElementById("downloadForm");
 const input = document.getElementById("tiktokUrl");
 const statusBox = document.getElementById("status");
 
@@ -427,15 +427,16 @@ form.addEventListener("submit", async (e) => {
   statusBox.textContent = "⏳ Đang xử lý...";
 
   try {
-    const resp = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
+    // Gọi API server trả direct link
+    const resp = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`);
     const data = await resp.json();
 
     if (!data.downloadUrl) {
-      statusBox.textContent = "❌ Không lấy được link video";
+      statusBox.textContent = "❌ Không lấy được video";
       return;
     }
 
-    // Tạo <a> tự click để tải
+    // Tạo <a> tự click tải video
     const a = document.createElement("a");
     a.href = data.downloadUrl;
     a.download = "tiktok.mp4";
