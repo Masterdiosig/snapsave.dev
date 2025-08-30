@@ -1,53 +1,69 @@
 import express from "express";
-import fetch from "node-fetch";
-import cors from "cors";
+import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-app.use(cors());
+// Middleware
 app.use(express.json());
+app.use(express.static("public"));
 
-// API tải TikTok
-app.get("/api/tiktok", async (req, res) => {
-  const { url, token } = req.query;
+// Trang chủ test form
+app.get("/", (req, res) => {
+  res.send(`
+    <form action="/api/tiktok" method="post">
+      <input type="url" name="url" placeholder="TikTok URL..." required style="width:300px">
+      <button type="submit">⬇️ Tải video</button>
+    </form>
+  `);
+});
 
-  if (token !== process.env.API_SECRET_TOKEN) {
-    return res.status(403).send("⛔ Sai token");
+// API download
+app.post("/api/tiktok", async (req, res) => {
+  const videoUrl = req.body.url || req.query.url;
+  if (!videoUrl) {
+    return res.status(400).json({ error: "❌ Thiếu URL TikTok" });
   }
-  if (!url) return res.status(400).send("❌ Thiếu URL TikTok");
 
   try {
-    // gọi RapidAPI
-    const apiRes = await fetch("https://tiktok-download-video1.p.rapidapi.com/newGetVideo?hd=1&url=" + encodeURIComponent(url), {
+    // Gọi API RapidAPI Snapsave
+    const options = {
+      method: "POST",
+      url: "https://tiktok-download-video1.p.rapidapi.com/newGetVideo",
       headers: {
+        "content-type": "application/json",
         "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
         "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
-      }
-    });
+      },
+      data: { url: videoUrl }
+    };
 
-    const data = await apiRes.json();
-    const videoUrl = data?.data?.hdplay || data?.data?.play;
+    const response = await axios.request(options);
+    console.log("✅ API trả về:", response.data);
+    const data = response.data;
 
-    if (!videoUrl) {
-      return res.status(500).send("❌ Không lấy được link video");
+    if (!data || !data.data || !data.data[0]?.url) {
+      return res.status(500).json({ error: "Không lấy được link video" });
     }
 
-    // ✅ tải video từ TikTok rồi stream lại kèm header ép download
-    const videoRes = await fetch(videoUrl);
+    const directLink = data.data[0].url;
+
+    // Stream về client
+    const videoStream = await axios.get(directLink, { responseType: "stream" });
+    res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
     res.setHeader("Content-Type", "video/mp4");
-    res.setHeader("Content-Disposition", "attachment; filename=\"tiktok.mp4\"");
-
-    videoRes.body.pipe(res);
-
+    videoStream.data.pipe(res);
   } catch (err) {
-    console.error(err);
-    res.status(500).send("⚠️ Lỗi xử lý video");
+    console.error("⚠️ Error:", err.message);
+    res.status(500).json({ error: "Không tải được video" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log("✅ Server chạy tại http://localhost:" + PORT);
+  console.log(`✅ Server chạy tại http://localhost:${PORT}`);
 });
 
 
