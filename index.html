@@ -457,31 +457,11 @@ const form = document.getElementById("downloadForm");
     }
   });
 
-
-// Nút paste/clear
-  pasteBtn.addEventListener("click", async () => {
-    if (pasteBtn.textContent === "Paste") {
-      try {
-        const text = await navigator.clipboard.readText();
-        if (text) {
-          input.value = text;
-          pasteBtn.textContent = "Clear";
-        }
-      } catch (err) {
-        console.error("Clipboard error:", err);
-      }
-    } else {
-      input.value = "";
-      pasteBtn.textContent = "Paste";
-      input.focus();
-    }
-  });
-
   // Nếu xoá input thì nút trở về "Paste"
   input.addEventListener("input", () => {
     if (!input.value.trim()) pasteBtn.textContent = "Paste";
   });
-
+  
  // Khi DOM sẵn sàng
  document.addEventListener("DOMContentLoaded", () => {
 const form = document.getElementById("downloadForm");
