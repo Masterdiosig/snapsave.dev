@@ -6,8 +6,33 @@
   <title>Snapsave.dev - Tải video TikTok không watermark</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 <!-- SEO Meta -->
+
+<title>Tải video TikTok không logo - SnapSave.dev</title>
+<meta name="description" content="Tải video TikTok không logo, chất lượng HD, lưu thẳng vào Tệp trên iPhone & Android. Nhanh, miễn phí, không cần cài app.">
+<link rel="canonical" href="https://www.snapsave.dev/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="SnapSave.dev - Tải video TikTok không logo">
+<meta property="og:description" content="Dán link TikTok → Tải ngay video chất lượng HD, lưu vào Tệp.">
+<meta property="og:url" content="https://www.snapsave.dev/">
+<meta property="og:image" content="https://www.snapsave.dev/og-thumbnail.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/logo_32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/logo_180.png">
+<link rel="manifest" href="/manifest.json">
+<meta property="og:title" content="SnapSave - Tải video TikTok không logo">
+<meta property="og:description" content="Tải nhanh video TikTok chất lượng cao, không watermark, lưu trực tiếp vào Tệp iPhone hoặc Android.">
+<meta property="og:image" content="/logo_512.png">
+<meta property="og:url" content="https://www.snapsave.dev">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SnapSave.dev - Tải video TikTok HD">
+<meta name="twitter:description" content="Tải video TikTok không logo, nhanh & miễn phí.">
+<meta name="twitter:image" content="https://www.snapsave.dev/og-thumbnail.jpg">
+
 <title>SnapTik: Download TikTok Video without Watermark Fast & Free</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
@@ -73,12 +98,15 @@
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6805310432922514"
      crossorigin="anonymous"></script>
-
 </head>
 <body>
+
   <!-- Menu -->
   <nav class="navbar">
-    <div class="nav-logo">Snapsave.dev</div>
+<div class="banner">
+    <img src="download.svg" alt="User manual" style="width: 100%; max-width: 600px; display: block; margin: 0 auto;" />
+  </div>
+
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
       <li><a href="#">Trang chủ</a></li>
@@ -93,17 +121,18 @@
     <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
   </header>
 
-  <!-- Form download -->
-   <section class="download-section">
-<form id="downloadForm" class="download-form">
-  <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
-  <button type="submit">⬇️ Tải video</button>
-  <button type="button" id="pasteBtn">Paste</button>
-</form>
-  <div id="resultBox"></div></section>
+  <section class="">
+  <div class="container">
+    <form id="downloadForm" class="download-form">
+      <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
+      <button type="submit">⬇️ Tải video</button>
+    <button type="button" id="pasteBtn">Paste</button>
+    </form>
+    <div id="status"></div>
+  </div>
+</section>
 
-
-<!-- Features -->
+  <!-- Features -->
     <section class="features">
       <div class="feature-item">
         <i class="fa-solid fa-ban fa-2x"></i>
@@ -161,7 +190,6 @@
       <p> 5. Chọn định dạng, chất lượng và lưu về thiết bị.</p></div>
       </div>
     </section>
-
  <!-- Content -->
   <section class="content container">
    <link rel="stylesheet" href="">
@@ -229,7 +257,6 @@
     <p>Snapsave.dev không chỉ là một công cụ, mà còn là biểu tượng cho phong cách sống hiện đại 
       và yêu công nghệ. Hãy truy cập Snapsave.dev ngay để trải nghiệm!</p>
   </div>
-
 
   <!-- English -->
    <header class="header">
@@ -365,7 +392,7 @@ If the link is new, it may take 1–2 seconds the first time.
     </section>
     </main>
 
-  <!-- Footer -->
+ <!-- Footer -->
   <footer id="contact">
     <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
     <nav>
@@ -376,7 +403,7 @@ If the link is new, it may take 1–2 seconds the first time.
   </footer>
 
 <script>
-// Toggle menu
+    // Toggle menu
 document.querySelector(".nav-toggle").addEventListener("click", () => {
   document.querySelector(".nav-links").classList.toggle("show");
 });
@@ -388,52 +415,30 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
   );
 });
 
-// Khi DOM sẵn sàng
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("downloadForm");
-  const input = document.getElementById("tiktokUrl");
-  const resultBox = document.getElementById("resultBox");
-  const pasteBtn = document.getElementById("pasteBtn");
+    const form = document.getElementById("downloadForm");
+    const input = document.getElementById("tiktokUrl");
+    const statusBox = document.getElementById("status");
 
-  // Submit form
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const url = input.value.trim();
-    if (!url) return alert("Vui lòng nhập link TikTok.");
-    resultBox.innerHTML = "⏳ Đang xử lý...";
-
-    try {
-const res = await fetch("/api/tiktok", { method: "POST", 
-headers: { "Content-Type": "application/json", "Authorization": 
-"Bearer my_super_secret_token_123", }, body: JSON.stringify({ url }), });
-
-
-      const data = await res.json();
-      console.log("API trả về:", data);
-
-      if (!data || !data.data || !data.data.length) {
-        resultBox.innerHTML = "❌ Không lấy được video.";
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const url = input.value.trim();
+      if (!url) {
+        alert("❌ Vui lòng nhập link TikTok");
         return;
       }
 
-      resultBox.innerHTML = `
-        ${data.meta?.thumbnail ? `<img src="${data.meta.thumbnail}" class="thumbnail" />` : ""}
-        ${data.meta?.author ? `<div class="author">@${data.meta.author}</div>` : ""}
-        ${data.meta?.description ? `<div class="desc">${data.meta.description}</div>` : ""}
-        ${data.data
-          .map(
-            (item) =>
-              `<button onclick="forceDownload('${item.url}', 'tiktok.mp4')">⬇️ ${item.label}</button>`
-          )
-          .join("")}
-      `;
-    } catch (err) {
-      console.error(err);
-      resultBox.innerHTML = "⚠️ Lỗi kết nối tới API.";
-    }
-  });
+      statusBox.textContent = "⏳ Đang xử lý...";
 
-  // Nút paste/clear
+      // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
+      window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
+
+      // Hiện thông báo (trong khi Safari tải)
+      setTimeout(() => {
+        statusBox.textContent = "✅ Nếu không thấy tải, hãy kiểm tra lại link TikTok.";
+      }, 2000);
+    });
+
+// Nút paste/clear
   pasteBtn.addEventListener("click", async () => {
     if (pasteBtn.textContent === "Paste") {
       try {
@@ -457,37 +462,32 @@ headers: { "Content-Type": "application/json", "Authorization":
     if (!input.value.trim()) pasteBtn.textContent = "Paste";
   });
 
+ // Khi DOM sẵn sàng
+ document.addEventListener("DOMContentLoaded", () => {
+const form = document.getElementById("downloadForm");
+  const resultBox = document.getElementById("resultBox");
+  const pasteBtn = document.getElementById("pasteBtn"); 
+
+document.addEventListener("DOMContentLoaded", async () => {
+  if (navigator.clipboard?.readText) {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text.startsWith("http")) {
+        const input = document.getElementById("tiktokUrl");
+         
+        input.value = text;
+      }
+    } catch (err) {
+      console.warn("Clipboard không khả dụng:", err);
+    }
+  }
+});
+
   // Cập nhật năm footer
   document.getElementById("y").textContent = new Date().getFullYear();
 });
 
-// Force download (tối ưu cho Safari iOS)
-async function forceDownload(url, filename) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Không tải được video");
-
-    const blob = await res.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = filename || "video.mp4";
-    a.target = "_blank"; // tránh Safari mở tab preview
-
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    // giải phóng blob sau 1s
-    setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
-  } catch (err) {
-    console.error("❌ Download error:", err);
-    alert("Không thể tải video. Vui lòng thử lại.");
-  }
-}
-
-</script>
-
+  </script>
 </body>
 </html>
+

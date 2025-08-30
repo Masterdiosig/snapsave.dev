@@ -401,12 +401,8 @@ If the link is new, it may take 1–2 seconds the first time.
       <a href="contact.html">Liên hệ</a>
     </nav>
   </footer>
-  
-  
-  
-  
-  <script>
 
+<script>
     // Toggle menu
 document.querySelector(".nav-toggle").addEventListener("click", () => {
   document.querySelector(".nav-links").classList.toggle("show");
@@ -419,28 +415,40 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
   );
 });
 
-    const form = document.getElementById("downloadForm");
-    const input = document.getElementById("tiktokUrl");
-    const statusBox = document.getElementById("status");
+   const form = document.getElementById("downloadForm");
+const input = document.getElementById("tiktokUrl");
+const statusBox = document.getElementById("status");
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const url = input.value.trim();
-      if (!url) {
-        alert("❌ Vui lòng nhập link TikTok");
-        return;
-      }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const url = input.value.trim();
+  if (!url) return alert("❌ Vui lòng nhập link TikTok");
 
-      statusBox.textContent = "⏳ Đang xử lý...";
+  statusBox.textContent = "⏳ Đang xử lý...";
 
-      // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
-      window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
+  try {
+    const resp = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
+    const data = await resp.json();
 
-      // Hiện thông báo (trong khi Safari tải)
-      setTimeout(() => {
-        statusBox.textContent = "✅ Nếu không thấy tải, hãy kiểm tra lại link TikTok.";
-      }, 2000);
-    });
+    if (!data.downloadUrl) {
+      statusBox.textContent = "❌ Không lấy được link video";
+      return;
+    }
+
+    // Tạo <a> tự click để tải
+    const a = document.createElement("a");
+    a.href = data.downloadUrl;
+    a.download = "tiktok.mp4";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    statusBox.textContent = "✅ Video sẵn sàng tải!";
+  } catch (err) {
+    console.error(err);
+    statusBox.textContent = "⚠️ Lỗi khi tải video";
+  }
+});
 
 // Nút paste/clear
   pasteBtn.addEventListener("click", async () => {
@@ -490,8 +498,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Cập nhật năm footer
   document.getElementById("y").textContent = new Date().getFullYear();
 });
-
-
 
   </script>
 </body>
