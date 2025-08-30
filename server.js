@@ -53,7 +53,7 @@ app.post("/api/tiktok", async (req, res) => {
 
     // Stream về client
     const videoStream = await axios.get(directLink, { responseType: "stream" });
-    res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
+    res.setHeader("Content-Disposition", `attachment; filename="Snapsave.dev.mp4"`);
     res.setHeader("Content-Type", "video/mp4");
     videoStream.data.pipe(res);
   } catch (err) {

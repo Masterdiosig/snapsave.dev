@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     const videoStream = await axios.get(videoUrl, { responseType: "stream" });
 
     res.setHeader("Content-Type", "video/mp4");
-    res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
+    res.setHeader("Content-Disposition", `attachment; filename="Snapsave.dev.mp4"`);
 
     videoStream.data.pipe(res);
   } catch (err) {
