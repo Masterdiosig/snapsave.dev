@@ -13,6 +13,7 @@ export default async function handler(req, res) {
 
   try {
     // POST request đúng chuẩn RapidAPI
+    console.log("API trả về:", JSON.stringify(apiRes.data, null, 2));
     const apiRes = await axios.post(
       "https://tiktok-download-video1.p.rapidapi.com/newGetVideo",
       { url }, // body JSON
