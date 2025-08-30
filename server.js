@@ -11,7 +11,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static("public"));
 
-// Trang chủ test form
+// Trang test form
 app.get("/", (req, res) => {
   res.send(`
     <form action="/api/tiktok" method="post">
@@ -24,40 +24,41 @@ app.get("/", (req, res) => {
 // API download
 app.post("/api/tiktok", async (req, res) => {
   const videoUrl = req.body.url || req.query.url;
-  if (!videoUrl) {
-    return res.status(400).json({ error: "❌ Thiếu URL TikTok" });
-  }
+  if (!videoUrl) return res.status(400).json({ error: "❌ Thiếu URL TikTok" });
 
   try {
-    // Gọi API RapidAPI Snapsave
+    // Gọi API RapidAPI lấy direct link
     const options = {
       method: "POST",
       url: "https://tiktok-download-video1.p.rapidapi.com/newGetVideo",
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com"
+        "X-RapidAPI-Host": "tiktok-download-video1.p.rapidapi.com",
       },
-      data: { url: videoUrl }
+      data: { url: videoUrl },
     };
 
-    const response = await axios.request(options);
-    console.log("✅ API trả về:", response.data);
-    const data = response.data;
+    const apiResp = await axios.request(options);
+    const directLink = apiResp.data?.data?.[0]?.url;
+    if (!directLink) return res.status(500).json({ error: "Không lấy được link video" });
 
-    if (!data || !data.data || !data.data[0]?.url) {
-      return res.status(500).json({ error: "Không lấy được link video" });
-    }
-
-    const directLink = data.data[0].url;
-
-    // Stream về client
+    // Stream trực tiếp từ source về client (chunked)
     const videoStream = await axios.get(directLink, { responseType: "stream" });
+
     res.setHeader("Content-Disposition", `attachment; filename="tiktok.mp4"`);
     res.setHeader("Content-Type", "video/mp4");
+
+    // Pipe trực tiếp chunk từ RapidAPI về client
     videoStream.data.pipe(res);
+
+    videoStream.data.on("end", () => console.log("✅ Streaming video xong"));
+    videoStream.data.on("error", (err) => {
+      console.error("⚠️ Lỗi stream video:", err.message);
+      res.end();
+    });
   } catch (err) {
-    console.error("⚠️ Error:", err.message);
+    console.error("⚠️ Lỗi API hoặc stream:", err.message);
     res.status(500).json({ error: "Không tải được video" });
   }
 });
@@ -65,6 +66,3 @@ app.post("/api/tiktok", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Server chạy tại http://localhost:${PORT}`);
 });
-
-
-
