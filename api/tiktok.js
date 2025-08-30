@@ -26,6 +26,8 @@ export default async function handler(req, res) {
       }
     );
 
+     console.log(JSON.stringify(apiRes.data, null, 2));
+     
     const data = apiRes.data?.data?.[0];
     const videoUrl = data?.hdplay || data?.play || data?.wmplay;
 
