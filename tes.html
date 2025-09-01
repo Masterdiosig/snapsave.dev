@@ -2,31 +2,47 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Test InMobi Ad</title>
+  <title>Test InMobi Ads</title>
   <style>
-    #inmobi-ad-container {
-      width: 320px;   /* chiều rộng banner */
-      height: 50px;   /* chiều cao banner */
+    /* Banner container */
+    #inmobi-banner {
+      width: 320px;
+      height: 50px;
       margin: 20px auto;
       border: 1px solid #ccc;
+    }
+    /* Native container */
+    #inmobi-native {
+      width: 300px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
-  <h2 style="text-align:center;">Test InMobi Ad</h2>
+  <h2 style="text-align:center;">Test InMobi Ads</h2>
 
-  <div id="inmobi-ad-container"></div>
+  <!-- Banner Ad -->
+  <div id="inmobi-banner"></div>
+
+  <!-- Native Ad -->
+  <div id="inmobi-native"></div>
 
   <script>
-    // Cấu hình InMobi
     window.inmobi = window.inmobi || {};
     window.inmobi.conf = {
-      siteid: "10000084710",  // Thay bằng siteID thật của bạn
+      siteid: "10000084710",  // Website Key thật
       slot: {
-        banner1: {
-          containerid: "inmobi-ad-container",
+        banner: {
+          containerid: "inmobi-banner",
           adtype: "banner",
-          slotid: "10000468239"  // Thay bằng placement ID thật
+          slotid: "10000468239" // Banner Placement ID
+        },
+        native: {
+          containerid: "inmobi-native",
+          adtype: "native",
+          slotid: "10000468934" // Native Placement ID
         }
       }
     };
@@ -36,9 +52,8 @@
   <script async src="https://i.l.inmobicdn.net/sdk/jsac/p1/inmobi.js"></script>
 
   <script>
-    // Kiểm tra khi script load xong
     window.addEventListener('load', () => {
-      console.log("Page loaded, InMobi script should render ad.");
+      console.log("Page loaded, InMobi script should render banner & native ad.");
     });
   </script>
 </body>
