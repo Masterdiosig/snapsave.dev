@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Test InMobi Ad</title>
+  <style>
+    #inmobi-ad-container {
+      width: 320px;   /* chiều rộng banner */
+      height: 50px;   /* chiều cao banner */
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">Test InMobi Ad</h2>
+
+  <div id="inmobi-ad-container"></div>
+
+  <script>
+    // Cấu hình InMobi
+    window.inmobi = window.inmobi || {};
+    window.inmobi.conf = {
+      siteid: "10000084710",  // Thay bằng siteID thật của bạn
+      slot: {
+        banner1: {
+          containerid: "inmobi-ad-container",
+          adtype: "banner",
+          slotid: "10000468239"  // Thay bằng placement ID thật
+        }
+      }
+    };
+  </script>
+
+  <!-- Script InMobi mới 2025 -->
+  <script async src="https://i.l.inmobicdn.net/sdk/jsac/p1/inmobi.js"></script>
+
+  <script>
+    // Kiểm tra khi script load xong
+    window.addEventListener('load', () => {
+      console.log("Page loaded, InMobi script should render ad.");
+    });
+  </script>
+</body>
+</html>
