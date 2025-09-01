@@ -153,8 +153,7 @@
     <div id="status"></div>
   </div>
 </section>
-<div id="inmobi-ad-container" style="width:320px;height:50px;margin:20px auto;border:1px solid
- #ccc;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;">[Banner Mock]</div>
+
   <!-- Features -->
     <section class="features">
       <div class="feature-item">
@@ -510,47 +509,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("y").textContent = new Date().getFullYear();
 });
 
-   // InMobi Ads với fallback mock
-    const fallbackTimeout = 3000; // ms
-    let inmobiLoaded = false;
-
-    const fallbackTimer = setTimeout(() => {
-      if (!inmobiLoaded) {
-        console.log("Fallback: Using mock ad");
-        const container = document.getElementById("inmobi-ad-container");
-        container.textContent = "[Banner Mock]";
-      }
-    }, fallbackTimeout);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      window.inmobi = window.inmobi || {};
-      window.inmobi.conf = {
-        siteid: "10000084710",   // Website Key thật
-        slot: {
-          banner: {
-            containerid: "inmobi-ad-container",
-            adtype: "banner",
-            slotid: "10000468239"  // Banner Placement ID thật
-          }
-        }
-      };
-
-      // Load script InMobi
-      const script = document.createElement('script');
-      script.src = "https://i.l.inmobicdn.net/sdk/jsac/p1/inmobi.js";
-      script.async = true;
-      script.onload = () => {
-        inmobiLoaded = true;
-        clearTimeout(fallbackTimer);
-        console.log("InMobi script loaded successfully");
-      };
-      script.onerror = () => {
-        console.log("Failed to load InMobi script, fallback to mock ad");
-      };
-      document.head.appendChild(script);
-    });
-    
-  </script>
-</body>
+ </script>
+  <body>
 </html>
 
