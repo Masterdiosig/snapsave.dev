@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /tmp/
+Disallow: /admin/
+Allow: /
+
+# Sitemap
+Sitemap: https://www.snapsave.dev/sitemap.xml
