@@ -133,10 +133,8 @@
     <div id="status"></div>
   </div>
 </section>
-
-<!-- Advertisement v-->
- <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e37" data-zoneid="5717350"></ins> 
+<script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e33" data-zoneid="5717364"></ins> 
  <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
 
     <section class="features">
@@ -156,11 +154,6 @@
         <p>Xử lý cực nhanh, không cần đăng nhập.</p>
       </div>
     </section>
-
-    <!--Advertisement bm --> 
-<script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e10" data-zoneid="5717352"></ins> 
- <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
 
     <section id="faq" class="faq">
       <h2>Câu hỏi thường gặp</h2>
@@ -267,10 +260,54 @@
     <p>Snapsave.dev không chỉ là một công cụ, mà còn là biểu tượng cho phong cách sống hiện đại 
       và yêu công nghệ. Hãy truy cập Snapsave.dev ngay để trải nghiệm!</p>
   </div>
-<!-- Advertisement bl-->
- <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e2" data-zoneid="5717348"></ins> 
- <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+
+<style>
+  #fixed-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 50px;
+    z-index: 9999;
+    box-shadow: 0px -2px 8px rgba(0,0,0,0.2);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 25px; /* để tránh che nút đóng */
+  }
+
+  #fixed-banner button.close-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ccc;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    line-height: 18px;
+    text-align: center;
+    padding: 0;
+  }
+
+  #fixed-banner button.close-btn:hover {
+    background: #999;
+  }
+</style>
+
+<div id="fixed-banner">
+  <button class="close-btn" onclick="document.getElementById('fixed-banner').style.display='none'">&times;</button>
+ <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>  
+  <ins class="eas6a97888e10" data-zoneid="5717352"></ins>  
+  <script>
+    (AdProvider = window.AdProvider || []).push({"serve": {}});
+  </script>
+</div>
 
    <header class="header">
     <h1><span class="logo">English.dev</span></h1>
