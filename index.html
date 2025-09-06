@@ -134,6 +134,11 @@
   </div>
 </section>
 
+<!-- Advertisement v-->
+ <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e37" data-zoneid="5717350"></ins> 
+ <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+
     <section class="features">
       <div class="feature-item">
         <i class="fa-solid fa-ban fa-2x"></i>
@@ -152,7 +157,11 @@
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!--Advertisement bm --> 
+<script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e10" data-zoneid="5717352"></ins> 
+ <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+
     <section id="faq" class="faq">
       <h2>Câu hỏi thường gặp</h2>
       <div class="faq-item">
@@ -170,7 +179,6 @@
     </section>
   </main>
 
-    <!-- FAQ -->
     <section id="faq" class="faq">
       <h2>Hỏi đáp</h2>
       <div class="faq-item">
@@ -192,7 +200,7 @@
       <p> 5. Chọn định dạng, chất lượng và lưu về thiết bị.</p></div>
       </div>
     </section>
- <!-- Content -->
+ 
   <section class="content container">
    <link rel="stylesheet" href="">
     <h2>Snapsave.dev: Trình tải video TikTok dành cho giới trẻ</h2>
@@ -259,19 +267,11 @@
     <p>Snapsave.dev không chỉ là một công cụ, mà còn là biểu tượng cho phong cách sống hiện đại 
       và yêu công nghệ. Hãy truy cập Snapsave.dev ngay để trải nghiệm!</p>
   </div>
-
-<script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e17" data-zoneid="5717340"></ins> 
- <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
-
+<!-- Advertisement bl-->
  <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
  <ins class="eas6a97888e2" data-zoneid="5717348"></ins> 
  <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
 
- <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e37" data-zoneid="5717350"></ins> 
- <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
-  <!-- English -->
    <header class="header">
     <h1><span class="logo">English.dev</span></h1>
     <p class="subtitle">Download high quality TikTok videos without watermark</p>
@@ -295,7 +295,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq" class="faq">
       <h2>Frequently Asked Questions</h2>
       <div class="faq-item">
@@ -312,7 +311,7 @@
       </div>
     </section>
   </main>
-    <!-- FAQ -->
+
     <section id="faq" class="faq">
       <h2>Q&A</h2>
       <div class="faq-item">
@@ -405,7 +404,6 @@ If the link is new, it may take 1–2 seconds the first time.
     </section>
     </main>
 
- <!-- Footer -->
   <footer id="contact">
     <p>&copy; <span id="y"></span> Snapsave.dev. All rights reserved.</p>
     <nav>
@@ -416,12 +414,11 @@ If the link is new, it may take 1–2 seconds the first time.
   </footer>
 
 <script>
-    // Toggle menu
+
 document.querySelector(".nav-toggle").addEventListener("click", () => {
   document.querySelector(".nav-links").classList.toggle("show");
 });
 
-// FAQ toggle
 document.querySelectorAll(".faq-question").forEach((btn) => {
   btn.addEventListener("click", () =>
     btn.parentElement.classList.toggle("active")
@@ -442,16 +439,13 @@ const form = document.getElementById("downloadForm");
 
       statusBox.textContent = "⏳ Đang xử lý...";
 
-      // 👉 Redirect thẳng đến server API (Safari sẽ tải file vào Tệp)
       window.location.href = `/api/tiktok?url=${encodeURIComponent(url)}&token=my_super_secret_token_123`;
 
-      // Hiện thông báo (trong khi Safari tải)
       setTimeout(() => {
         statusBox.textContent = "✅ Nếu không thấy tải, hãy kiểm tra lại link TikTok.";
       }, 2000);
     });
 
-// Nút paste/clear
   pasteBtn.addEventListener("click", async () => {
     if (pasteBtn.textContent === "Paste") {
       try {
@@ -470,12 +464,10 @@ const form = document.getElementById("downloadForm");
     }
   });
 
-  // Nếu xoá input thì nút trở về "Paste"
   input.addEventListener("input", () => {
     if (!input.value.trim()) pasteBtn.textContent = "Paste";
   });
 
- // Khi DOM sẵn sàng
  document.addEventListener("DOMContentLoaded", () => {
 const form = document.getElementById("downloadForm");
   const resultBox = document.getElementById("resultBox");
@@ -496,7 +488,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-  // Cập nhật năm footer
   document.getElementById("y").textContent = new Date().getFullYear();
 });
 
