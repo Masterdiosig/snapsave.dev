@@ -1,0 +1,45 @@
+{
+  "home": "Beranda",
+  "faq": "FAQ",
+  "blog": "Blog",
+  "dmca": "DMCA",
+  "contact": "Kontak",
+  "policy": "Kebijakan Privasi",
+  "terms": "Syarat & Ketentuan",
+
+  "download_video": "Unduh Video TikTok",
+  "download_subtitle": "Tanpa Watermark, Gratis, Cepat dan Mudah",
+  "paste_url": "Tempel tautan di sini...",
+  "download_now": "Unduh Sekarang",
+  "downloading": "Sedang mengunduh...",
+  "download_failed": "Gagal mengunduh, coba lagi!",
+
+  "why_choose": "Mengapa memilih SnapSave?",
+  "no_watermark": "Unduh video tanpa watermark",
+  "multiple_formats": "Mendukung berbagai format dan kualitas",
+  "fast_free": "Cepat, Gratis, dan Mudah digunakan",
+  "support_platforms": "Dukungan banyak platform video",
+
+  "how_to_use": "Cara Menggunakan",
+  "step_1": "Salin tautan video TikTok yang ingin Anda unduh",
+  "step_2": "Tempel tautan ke kotak input di atas",
+  "step_3": "Klik tombol Unduh dan pilih format video",
+
+  "faq_title": "Pertanyaan yang Sering Diajukan",
+  "faq_q1": "Apakah SnapSave gratis?",
+  "faq_a1": "Ya, SnapSave sepenuhnya gratis untuk digunakan tanpa biaya tersembunyi.",
+  "faq_q2": "Apakah SnapSave menyimpan video saya?",
+  "faq_a2": "Tidak, semua video diunduh langsung dari server TikTok. Kami tidak menyimpan data Anda.",
+  "faq_q3": "Bisakah saya mengunduh di ponsel?",
+  "faq_a3": "Ya, SnapSave mendukung perangkat mobile Android, iOS, serta PC dan tablet.",
+
+  "dmca_title": "Kebijakan DMCA",
+  "dmca_text": "Jika Anda yakin ada konten yang melanggar hak cipta, silakan hubungi kami melalui halaman Kontak. Kami akan menindaklanjuti sesuai kebijakan DMCA.",
+
+  "contact_title": "Hubungi Kami",
+  "contact_text": "Jika Anda memiliki pertanyaan, umpan balik, atau laporan masalah, silakan kirim email ke:",
+  "contact_email": "support@snapsave.dev",
+
+  "footer_text": "SnapSave adalah alat pengunduh video TikTok gratis tanpa watermark. Kami tidak berafiliasi dengan TikTok atau ByteDance.",
+  "rights_reserved": "Semua Hak Dilindungi © SnapSave"
+}

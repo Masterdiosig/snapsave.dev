@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="sitemap-style.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
     <loc>https://www.snapsave.dev/</loc>
-    <lastmod>2025-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.snapsave.dev/en" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.snapsave.dev/vi" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.snapsave.dev/id" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.snapsave.dev/" />
+    <lastmod>2025-09-23</lastmod>
     <priority>1.0</priority>
   </url>
+
+  <url>
+    <loc>https://www.snapsave.dev/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.snapsave.dev/en" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.snapsave.dev/vi" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.snapsave.dev/id" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.snapsave.dev/" />
+    <lastmod>2025-09-23</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.snapsave.dev/vi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.snapsave.dev/en" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.snapsave.dev/vi" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.snapsave.dev/id" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.snapsave.dev/" />
+    <lastmod>2025-09-23</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.snapsave.dev/id</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.snapsave.dev/en" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.snapsave.dev/vi" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.snapsave.dev/id" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.snapsave.dev/" />
+    <lastmod>2025-09-23</lastmod>
+    <priority>0.9</priority>
+  </url>
+
   <url>
     <loc>https://www.snapsave.dev/blog/</loc>
     <lastmod>2025-09-06</lastmod>
@@ -20,11 +57,6 @@
     <loc>https://www.snapsave.dev/terms.html</loc>
     <lastmod>2025-09-06</lastmod>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.snaptik.rest/id/index.html</loc>
-    <lastmod>2025-09-06</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.snapsave.dev/privacy.html</loc>
@@ -64,3 +96,4 @@
     <priority>0.9</priority>
   </url>
 </urlset>
+

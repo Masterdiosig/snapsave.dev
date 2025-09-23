@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SnapSave - Download Facebook, TikTok, Instagram Videos in HD</title>
+  <meta name="description" content="SnapSave allows you to download videos from Facebook, TikTok, and Instagram in HD quality, fast and free." />
+  <meta name="keywords" content="Facebook downloader, TikTok downloader, Instagram downloader, HD video download" />
+  <link rel="canonical" href="https://www.snapsave.dev/en/" />
+  <link rel="alternate" href="https://www.snapsave.dev/" hreflang="vi" />
+  <link rel="alternate" href="https://www.snapsave.dev/en/" hreflang="en" />
+  <link rel="alternate" href="https://www.snapsave.dev/id/" hreflang="id" />
+  <link rel="alternate" href="https://www.snapsave.dev/" hreflang="x-default" />
+  <meta property="og:title" content="SnapSave - Download Facebook, TikTok, Instagram Videos in HD" />
+  <meta property="og:description" content="Free online tool to download videos from Facebook, TikTok, and Instagram in HD quality." />
+  <meta property="og:url" content="https://www.snapsave.dev/en/" />
+  <meta property="og:image" content="https://www.snapsave.dev/assets/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SnapSave - Download Videos in HD" />
+  <meta name="twitter:description" content="Free video downloader for Facebook, TikTok, and Instagram in HD." />
+  <meta name="twitter:image" content="https://www.snapsave.dev/assets/og-image.jpg" />
+  <link rel="stylesheet" href="en.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">SnapSave</div>
+    <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">&#9776;</div>
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/blog/">Blog</a></li>
+      <li><a href="/en/contact.html">Contact</a></li>
+      <li><a href="/en/about.html">About</a></li>
+      <li>
+        <select onchange="location = this.value;">
+          <option value="/" >🇻🇳 Vietnamese</option>
+          <option value="/en/" selected>🇬🇧 English</option>
+          <option value="/id/">🇮🇩 Bahasa Indonesia</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="header">
+    <h1 class="logo">SnapSave</h1>
+    <p class="subtitle">Download Facebook, TikTok, Instagram videos in HD – fast, free, no watermark.</p>
+  </header>
+
+  <section class="download-section">
+    <form id="downloadForm" class="download-form" action="/api/download" method="POST">
+      <input type="url" name="url" placeholder="Paste video link here..." required />
+      <button type="submit">Download</button>
+    </form>
+    <div id="resultBox"></div>
+  </section>
+
+  <section class="features">
+    <div class="feature-item">
+      <i>⚡</i>
+      <h3>Fast & Free</h3>
+      <p>Download videos in just seconds, completely free.</p>
+    </div>
+    <div class="feature-item">
+      <i>🎥</i>
+      <h3>HD & 4K Support</h3>
+      <p>Enjoy high-quality downloads, even 4K when available.</p>
+    </div>
+    <div class="feature-item">
+      <i>❌</i>
+      <h3>No Watermark</h3>
+      <p>Get clean videos without annoying watermarks.</p>
+    </div>
+    <div class="feature-item">
+      <i>📱</i>
+      <h3>Any Device</h3>
+      <p>Works smoothly on mobile, tablet, and desktop.</p>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Is SnapSave free?</h3>
+      <p>Yes, SnapSave is 100% free and always will be.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need to install any app?</h3>
+      <p>No, SnapSave is a web-based tool. Just paste the link and download.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Which sites are supported?</h3>
+      <p>Currently Facebook, TikTok, and Instagram. More platforms will be added soon.</p>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 SnapSave.dev - All rights reserved.</p>
+    <nav>
+      <a href="/en/terms.html">Terms</a> |
+      <a href="/en/privacy.html">Privacy</a> |
+      <a href="/en/dmca.html">DMCA</a>
+    </nav>
+  </footer>
+
+  <script>
+    const form = document.getElementById("downloadForm");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const url = form.url.value;
+      document.getElementById("resultBox").innerHTML =
+        "<p>Processing: " + url + "</p>";
+    });
+  </script>
+</body>
+</html>
