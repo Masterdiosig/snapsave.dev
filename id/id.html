@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,156 +48,175 @@
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
       <li><a href="#">Trang chủ</a></li>
-      <li><a href="/id/en.html">en</a></li>
-      <option value="/" >🇻🇳 Vietnamese</option>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="blog/index.html">Blog</a></li>
       <li><a href="dmca.html">DMCA</a></li>
+       <li>
+        <select onchange="location = this.value;">
+          <option value="/" >🇻🇳 Vietnamese</option>
+          <option value="/id/en.html" selected>🇬🇧 English</option>
+          <option value="/id/id.html">🇮🇩 Indonesia</option>
+        </select>
+      </li>
     </ul>
   </nav>
 
-  <header class="header">
-    <h1><span class="logo">Snapsave.dev</span></h1>
-    <p class="subtitle">Tải video TikTok chất lượng cao không watermark</p>
-  </header>
+ <header class="header">
+<h1><span class="logo">Snapsave.dev</span></h1>
+<p class="subtitle">Video TikTok tanpa tanda air</p>
+</header>
 
-  <section class="">
-  <div class="container">
-    <form id="downloadForm" class="download-form">
-      <input type="text" id="tiktokUrl" placeholder="Dán link TikTok vào đây..." />
-      <button type="submit">⬇️ Tải video</button>
-    <button type="button" id="pasteBtn">Paste</button>
-    </form>
+<section class="">
+<div class="container">
+<form id="downloadForm" class="download-form">
+<input type="text" id="tiktokUrl" placeholder="Tautan TikTok ke..." />
+<button type="submit">⬇️ Video</button>
+<button type="button" id="pasteBtn">Tempel</button>
+</form>
     <div id="status"></div>
   </div>
 </section>
-<script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script> 
- <ins class="eas6a97888e33" data-zoneid="57173p64"></ins> 
- <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script> 
 
     <section class="features">
       <div class="feature-item">
         <i class="fa-solid fa-ban fa-2x"></i>
-        <h3>Không watermark</h3>
-        <p>Video sạch sẽ, không logo TikTok.</p>
-      </div>
-      <div class="feature-item">
-        <i class="fa-solid fa-photo-film fa-2x"></i>
-        <h3>Nhiều định dạng</h3>
-        <p>Video, ảnh, slideshow, MP3.</p>
-      </div>
-      <div class="feature-item">
-        <i class="fa-solid fa-bolt fa-2x"></i>
-        <h3>Tốc độ cao</h3>
-        <p>Xử lý cực nhanh, không cần đăng nhập.</p>
-      </div>
+<h3>Tanpa tanda air</h3>
+<p>Video bersih, tanpa logo TikTok.</p>
+</div>
+<div class="feature-item">
+<i class="fa-solid fa-photo-film fa-2x"></i>
+<h3>Beragam format</h3>
+<p>Video, foto, tayangan slide, MP3.</p>
+</div>
+<div class="feature-item">
+<i class="fa-solid fa-bolt fa-2x"></i>
+<h3>Kecepatan tinggi</h3>
+<p>Pemrosesan sangat cepat, tanpa perlu login.</p>
+</div>
     </section>
 
     <section id="faq" class="faq">
-      <h2>Câu hỏi thường gặp</h2>
-      <div class="faq-item">
-        <h4>Tải video có miễn phí không?</h4>
-        <p>Có, Snapsave.dev hoàn toàn miễn phí và không cần đăng ký.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Có lưu trữ video của tôi không?</h4>
-        <p>Không, tất cả video được xử lý trực tiếp và không lưu trên server.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Có thể tải trên iPhone không?</h4>
-        <p>Có, chỉ cần dùng Safari/Chrome và dán link TikTok.</p>
-      </div>
+      <h2>FAQ</h2>
+<div class="faq-item">
+<h4>Apakah mengunduh video gratis?</h4>
+<p>Ya, Snapsave.dev sepenuhnya gratis dan tidak perlu registrasi.</p>
+</div>
+<div class="faq-item">
+<h4>Apakah mereka menyimpan video saya?</h4>
+<p>Tidak, semua video diproses secara langsung dan tidak disimpan di server.</p>
+</div>
+<div class="faq-item">
+<h4>Bisakah saya mengunduh di iPhone?</h4>
+<p>Ya, cukup gunakan Safari/Chrome dan tempel tautan TikTok.</p>
+</div>
     </section>
   </main>
 
     <section id="faq" class="faq">
-      <h2>Hỏi đáp</h2>
-      <div class="faq-item">
-        <button class="faq-question">Tại sao tải chậm?</button>
-        <div class="faq-answer"> Tụi mình parse trực tiếp TikTok, không qua trung gian và có cache 10 phút, nên thường hiển thị tức thì.
-           Nếu link mới, lần đầu có thể mất 1–2 giây.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Có miễn phí không?</button>
-        <div class="faq-answer">Có. Bạn có thể dùng thoải mái.</div>
-      </div>
+     <h2>FAQ</h2>
+<div class="faq-item">
+<button class="faq-question">Mengapa lambat dimuat?</button>
+<div class="faq-answer"> Kami mengurai TikTok secara langsung, tanpa perantara dan memiliki cache 10 menit, sehingga biasanya langsung ditampilkan.
+Jika tautannya baru, mungkin perlu waktu 1-2 detik untuk pertama kalinya.
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Apakah gratis?</button>
+<div class="faq-answer">Ya. Anda dapat menggunakannya secara gratis.</div>
+</div>
        <div class="faq-item">
-        <button class="faq-question">Hướng dẫn tải video?</button>
-       <div class="faq-answer">1. Truy cập https://Snapsave.dev/vi
-       <p> 2. Sao chép liên kết video TikTok bạn muốn tải.</p>
-      <p> 3. Dán liên kết vào ô tìm kiếm trên Snapsave.dev.</p>
-       <p>4. Nhấn nút Tải xuống và chờ vài giây.</p>
-      <p> 5. Chọn định dạng, chất lượng và lưu về thiết bị.</p></div>
-      </div>
+       <button class="faq-question">Bagaimana cara mengunduh video?</button>
+<div class="faq-answer">1. Buka https://Snapsave.dev/vi
+<p> 2. Salin tautan video TikTok yang ingin Anda unduh.</p>
+<p> 3. Tempel tautan tersebut ke kolom pencarian di Snapsave.dev.</p>
+<p>4. Tekan tombol Unduh dan tunggu beberapa detik.</p>
+<p> 5. Pilih format, kualitas, dan simpan ke perangkat Anda.</p></div>
+</div>
     </section>
  
   <section class="content container">
    <link rel="stylesheet" href="">
-    <h2>Snapsave.dev: Trình tải video TikTok dành cho giới trẻ</h2>
-    <p>TikTok – mạng xã hội video phổ biến nhất hiện nay...</p>
-       <p>TikTok – mạng xã hội video phổ biến nhất hiện nay, nơi giới trẻ tha hồ 
-      sáng tạo với những xu hướng độc đáo và cuốn hút. TikTok đã trở thành một 
-      phần không thể thiếu trong cuộc sống hằng ngày của hàng triệu người dùng. 
-      Và nếu bạn muốn tải các video yêu thích không logo hoặc watermark để chia 
-      sẻ với bạn bè hay đăng lại trên các nền tảng khác, bạn cần dùng Snapsave.dev – Công 
-      cụ tải video TikTok trực tuyến.</p>
+<h2>Snapsave.dev: Pengunduh video TikTok untuk anak muda</h2>
+<p>TikTok – jejaring sosial video terpopuler saat ini...</p>
+<p>TikTok – jejaring sosial video terpopuler saat ini, tempat anak muda dapat bebas
+berkreasi dengan tren yang unik dan menarik. TikTok telah menjadi
+bagian tak terpisahkan dari kehidupan sehari-hari jutaan pengguna.
+Dan jika Anda ingin mengunduh video favorit tanpa logo atau tanda air untuk dibagikan
+dengan teman atau diunggah ulang di platform lain, Anda perlu menggunakan Snapsave.dev – Pengunduh video TikTok daring.</p>
 
-    <p>Snapsave.dev được chúng tôi tạo ra nhằm mang đến giải pháp hoàn hảo và toàn 
-      diện cho người dùng TikTok. Snapsave.dev không chỉ là trình tải video TikTok, mà còn
-       hướng tới trở thành công cụ phù hợp với nhu cầu của giới trẻ hiện đại và tương lai. 
-       Chữ “Z” trong tên gọi gợi nhắc đến Gen Z – thế hệ năng động, sáng tạo và luôn khao khát
-        tiên phong.</p>
+   <p>Snapsave.dev diciptakan oleh kami untuk menyediakan solusi yang sempurna dan komprehensif
+bagi pengguna TikTok. Snapsave.dev bukan hanya pengunduh video TikTok, tetapi juga
+bertujuan untuk menjadi alat yang memenuhi kebutuhan generasi muda masa kini dan masa depan.
+Huruf "Z" dalam namanya mengacu pada Gen Z - generasi yang dinamis dan kreatif yang selalu bercita-cita
+menjadi pelopor.</p>
+
+<h2>Pengunduh TikTok</h2>
+<p>Snapsave.dev dikembangkan berdasarkan teknologi PWA (Progressive Web App),
+menghadirkan pengalaman mengunduh video TikTok langsung di peramban tanpa perlu menginstal
+perangkat lunak tambahan. Cukup masukkan tautan video ke Snapsave.dev, semua pemrosesan akan berlangsung
+di server kami, memastikan proses yang cepat, aman, dan gratis.</p>
   
-   <h2>TikTok Downloader</h2>
-    <p>Snapsave.dev được phát triển dựa trên công nghệ PWA (Progressive Web App), 
-      mang lại trải nghiệm tải video TikTok trực tiếp trong trình duyệt mà không cần cài 
-      đặt phần mềm bổ sung. Chỉ cần nhập liên kết video vào Snapsave.dev, mọi xử lý sẽ diễn ra 
-      trên máy chủ của chúng tôi, đảm bảo nhanh chóng, an toàn và miễn phí.</p>
-  
-    <h2>Các tính năng nổi bật</h2>
-      <p>Không Watermark, Logo: Tự động xóa watermark, logo và ID người dùng khỏi video hoặc ảnh.</p>
-      <p>Tải video TikTok chất lượng cao.</p>
-      <p>Tải ảnh TikTok và slideshow ở kích thước đầy đủ.</p>
-      <p>Tải Story TikTok để xem lại bất cứ lúc nào.</p>
-      <p>Tải âm thanh TikTok (MP3) để nghe offline hoặc làm nhạc chuông.</p>
-      <p>Tải ảnh từ TikTok Notes ở chất lượng HD không logo.</p>
-  
-    <h2>Hướng dẫn tải video TikTok không watermark</h2>
-      <p>Truy cập <b>https://Snapsave.dev/vi</b></p>
-      <p>Sao chép liên kết video TikTok bạn muốn tải.</p>
-      <p>Dán liên kết vào ô tìm kiếm trên Snapsave.dev.</li>
-      <p>Nhấn nút <b>Tải xuống</b> và chờ vài giây.</p>
-      <p>Chọn định dạng, chất lượng và lưu về thiết bị.</p>
+ <h2>Fitur Unggulan</h2>
+<p>Tanpa Tanda Air, Logo: Hapus tanda air, logo, dan ID pengguna secara otomatis dari video atau foto.</p>
+<p>Unduh video TikTok berkualitas tinggi.</p>
+<p>Unduh foto dan tayangan slide TikTok dalam ukuran penuh.</p>
+<p>Unduh TikTok Stories untuk ditinjau kapan saja.</p>
+<p>Unduh audio TikTok (MP3) untuk didengarkan secara offline atau sebagai nada dering.</p>
+<p>Unduh foto dari TikTok Notes dalam kualitas HD tanpa logo.</p>
+
+<h2>Petunjuk untuk mengunduh video TikTok tanpa tanda air</h2>
+<p>Buka <b>https://Snapsave.dev/vi</b></p>
+<p>Salin tautan video TikTok yang ingin Anda unduh.</p>
+<p>Tempel tautan ke kotak pencarian di Snapsave.dev.</li>
+<p>Tekan tombol <b>Unduh</b> dan tunggu beberapa detik.</p>
+<p>Pilih format, kualitas, dan simpan ke perangkat.</p>
 
 
-    <h2>Tải video TikTok trên iPhone và iPad</h2>
-    <p>Snapsave.dev là ứng dụng dựa trên trình duyệt, tương thích với mọi thiết bị iOS và Android.</p>
-      <p>Mở TikTok, sao chép liên kết video cần tải.</p>
-      <p>Mở trình duyệt và truy cập Snapsave.dev.</p>
-      <p>Dán liên kết vào ô nhập liệu, nhấn <b>Tải xuống</b>.</li>
-      <p>Chọn định dạng, chất lượng, xác nhận tải.</p></p>
-      <p>Mở ứng dụng <b>Tệp</b> → <b>Downloads</b> để xem video đã tải.</p>
-      <p>Nhấn giữ video, chọn <b>Chia sẻ</b> → <b>Lưu video</b>.</p>
-      <p>Mở ứng dụng Ảnh và thưởng thức video.</p>
+<h2>Unduh video TikTok di iPhone dan iPad</h2>
+<p>Snapsave.dev adalah aplikasi berbasis peramban yang kompatibel dengan semua perangkat iOS dan Android.</p>
+<p>Buka TikTok, salin tautan video untuk mengunduh.</p>
+<p>Buka peramban dan buka Snapsave.dev.</p>
+<p>Tempel tautan ke kotak input, ketuk <b>Unduh</b>.</li>
+<p>Pilih format, kualitas, konfirmasi unduhan.</p></p>
+<p>Buka aplikasi <b>File</b> → <b>Unduhan</b> untuk melihat video yang diunduh.</p>
+<p>Tekan lama video, pilih <b>Bagikan</b> → <b>Simpan video</b>.</p>
+<p>Buka aplikasi Foto dan nikmati videonya.</p>
 
-    <h2>Lý do chọn Snapsave.dev</h2>
-      <p>Hoàn toàn miễn phí, không giới hạn lượt tải.</li>
-      <p>Bảo mật tuyệt đối, không lưu dữ liệu người dùng.</li>
-      <p>Hỗ trợ đa nền tảng (Windows, Mac, Android, iOS).</li>
-      <p>Chất lượng cao (lên tới 4K).</li>
-      <p>Giao diện thân thiện, dễ dùng.</li>
+<h2>Alasan memilih Snapsave.dev</h2>
+<p>Sepenuhnya gratis, tanpa batas Unduhan.</li>
+<p>Keamanan mutlak, tidak ada data pengguna yang disimpan.</li>
+<p>Dukungan multi-platform (Windows, Mac, Android, iOS).</li>
+<p>Kualitas tinggi (hingga 4K).</li>
+<p>Antarmuka yang ramah pengguna, mudah digunakan.</li>
   
 
-    <h2>Điểm khác biệt</h2>
-    <p>So với các công cụ khác như Snapsave.dev, Snapsave.dev được thiết kế hiện đại,
-       phong cách trẻ trung, gần gũi với Gen Z, nhưng vẫn đảm bảo thao tác tải nhanh chóng và đơn 
-       giản.</p>
+<h2>Unduh video TikTok di iPhone dan iPad</h2>
+<p>Snapsave.dev adalah aplikasi berbasis peramban yang kompatibel dengan semua perangkat iOS dan Android.</p>
+<p>Buka TikTok, salin tautan video untuk mengunduh.</p>
+<p>Buka peramban dan buka Snapsave.dev.</p>
+<p>Tempel tautan ke kotak input, ketuk <b>Unduh</b>.</li>
+<p>Pilih format, kualitas, konfirmasi unduhan.</p></p>
+<p>Buka aplikasi <b>File</b> → <b>Unduhan</b> untuk melihat video yang diunduh.</p>
+<p>Tekan lama video, pilih <b>Bagikan</b> → <b>Simpan video</b>.</p>
+<p>Buka aplikasi Foto dan nikmati videonya.</p>
 
-    <h2>Khám phá .rest</h2>
-    <p>Snapsave.dev không chỉ là một công cụ, mà còn là biểu tượng cho phong cách sống hiện đại 
-      và yêu công nghệ. Hãy truy cập Snapsave.dev ngay để trải nghiệm!</p>
-  </div>
+<h2>Alasan memilih Snapsave.dev</h2>
+<p>Sepenuhnya gratis, tanpa batas Unduhan.</li>
+<p>Keamanan mutlak, tidak ada data pengguna yang disimpan.</li>
+<p>Dukungan multi-platform (Windows, Mac, Android, iOS).</li>
+<p>Kualitas tinggi (hingga 4K).</li>
+<p>Antarmuka yang ramah pengguna, mudah digunakan.</li>
+
+  <h2>Unduh video TikTok di iPhone dan iPad</h2>
+<p>Snapsave.dev adalah aplikasi berbasis peramban yang kompatibel dengan semua perangkat iOS dan Android.</p>
+<p>Buka TikTok, salin tautan video untuk mengunduh.</p>
+<p>Buka peramban dan buka Snapsave.dev.</p>
+<p>Tempel tautan ke kotak input, ketuk <b>Unduh</b>.</li>
+<p>Pilih format, kualitas, konfirmasi unduhan.</p></p>
+<p>Buka aplikasi <b>File</b> → <b>Unduhan</b> untuk melihat video yang diunduh.</p>
+<p>Tekan lama video, pilih <b>Bagikan</b> → <b>Simpan video</b>.</p>
+<p>Buka aplikasi Foto dan nikmati videonya.</p>
+
 
 <style>
   #fixed-banner {
