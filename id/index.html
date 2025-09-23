@@ -45,6 +45,7 @@
     <img src="download.svg" alt="User manual" style="width: 100%; max-width: 600px; display: block; margin: 0 auto;" />
   </div>
 
+   
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
       <li><a href="#">Trang chủ</a></li>
@@ -52,11 +53,23 @@
       <li><a href="blog/index.html">Blog</a></li>
       <li><a href="dmca.html">DMCA</a></li>
        <li>
-        <select onchange="location = this.value;">
-          <option value="/" >🇻🇳 Vietnamese</option>
-          <option value="/id/en.html" selected>🇬🇧 English</option>
-          <option value="/id/id.html">🇮🇩 Indonesia</option>
-        </select>
+    <select id="langSelect" onchange="window.location.href=this.value">
+  <option value="/en/">🇬🇧 English</option>
+  <option value="/">🇻🇳 Vietnamese</option>
+  <option value="/id/">🇮🇩 Indonesia</option>
+</select>
+<script>
+  const path = window.location.pathname;
+  const select = document.getElementById("langSelect");
+
+  if (path.startsWith("/vi")) {
+    select.value = "/vi/";
+  } else if (path.startsWith("/id")) {
+    select.value = "/id/";
+  } else {
+    select.value = "/en/";
+  }
+</script>
       </li>
     </ul>
   </nav>

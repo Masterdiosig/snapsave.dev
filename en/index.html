@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="SnapSave - Download Videos in HD" />
   <meta name="twitter:description" content="Free video downloader for Facebook, TikTok, and Instagram in HD." />
   <meta name="twitter:image" content="https://www.snapsave.dev/assets/og-image.jpg" />
-  <link rel="stylesheet" href="en.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -34,11 +34,23 @@
       <li><a href="/en/contact.html">Contact</a></li>
       <li><a href="/en/about.html">About</a></li>
       <li>
-        <select onchange="location = this.value;">
-          <option value="/" >🇻🇳 Vietnamese</option>
-          <option value="/id/en.html" selected>🇬🇧 English</option>
-          <option value="/id/id.html">🇮🇩 Indonesia</option>
-        </select>
+    <select id="langSelect" onchange="window.location.href=this.value">
+  <option value="/en/">🇬🇧 English</option>
+  <option value="/">🇻🇳 Vietnamese</option>
+  <option value="/id/">🇮🇩 Indonesia</option>
+</select>
+<script>
+  const path = window.location.pathname;
+  const select = document.getElementById("langSelect");
+
+  if (path.startsWith("/vi")) {
+    select.value = "/vi/";
+  } else if (path.startsWith("/id")) {
+    select.value = "/id/";
+  } else {
+    select.value = "/en/";
+  }
+</script>
       </li>
     </ul>
   </nav>
