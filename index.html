@@ -110,16 +110,16 @@
       <li><a href="#">Trang chủ</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="dmca.html">DMCA</a></li>
-      <li><a href="/id/id.html">Indonesia</a></li>
       <li><a href="blog/index.html">Blog</a></li>
         <li>
-    <select id="langSelect" onchange="window.location.href=this.value">
- <option value="/">🇻🇳 Vietnamese</option>
+<select id="langSelect" onchange="window.location.href=this.value">
   <option value="/en/">🇬🇧 English</option>
+  <option value="/vi/">🇻🇳 Vietnamese</option>
   <option value="/id/">🇮🇩 Indonesia</option>
 </select>
+
 <script>
-  const path = window.location.pathname;
+  const path = window.location.pathname; 
   const select = document.getElementById("langSelect");
 
   if (path.startsWith("/vi")) {
@@ -130,6 +130,7 @@
     select.value = "/en/";
   }
 </script>
+
       </li>
       </li>
     </ul>
