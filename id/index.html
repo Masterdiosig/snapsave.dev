@@ -45,7 +45,57 @@
     <img src="download.svg" alt="User manual" style="width: 100%; max-width: 600px; display: block; margin: 0 auto;" />
   </div>
 
-   
+   <div class="lang-switcher">
+  <button id="langBtn">
+    <span id="langFlag">🇬🇧</span>
+    <span id="langText">English</span>
+    <span class="arrow">▼</span>
+  </button>
+  <ul id="langMenu" class="hidden">
+    <li data-value="/en/"><span>🇬🇧</span> English</li>
+    <li data-value="/vi/"><span>🇻🇳</span> Vietnamese</li>
+    <li data-value="/id/"><span>🇮🇩</span> Indonesia</li>
+  </ul>
+</div>
+
+<script>
+  const langBtn = document.getElementById("langBtn");
+  const langMenu = document.getElementById("langMenu");
+  const langFlag = document.getElementById("langFlag");
+  const langText = document.getElementById("langText");
+
+  // Toggle menu
+  langBtn.addEventListener("click", () => {
+    langMenu.classList.toggle("show");
+  });
+
+  // Click chọn ngôn ngữ
+  langMenu.querySelectorAll("li").forEach(item => {
+    item.addEventListener("click", () => {
+      window.location.href = item.dataset.value;
+    });
+  });
+
+  // Auto chọn ngôn ngữ theo URL
+  const path = window.location.pathname;
+  if (path.startsWith("/vi")) {
+    langFlag.textContent = "🇻🇳";
+    langText.textContent = "Vietnamese";
+  } else if (path.startsWith("/id")) {
+    langFlag.textContent = "🇮🇩";
+    langText.textContent = "Indonesia";
+  } else {
+    langFlag.textContent = "🇬🇧";
+    langText.textContent = "English";
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+      langMenu.classList.remove("show");
+    }
+  });
+</script>
+
     <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
     <ul class="nav-links">
       <li><a href="#">Trang chủ</a></li>
@@ -59,8 +109,7 @@
   <option value="/id/">🇮🇩 Indonesia</option>
 </select>
 <script>
-  const path = window.location.pathname;
-  const select = document.getElementById("langSelect");
+ 
 
   if (path.startsWith("/vi")) {
     select.value = "/vi/";
